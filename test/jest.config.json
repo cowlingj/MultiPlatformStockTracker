@@ -1,0 +1,6 @@
+{
+  "name": "multi-platform-stock-tracker",
+  "jest": {
+    "preset": "react-native"
+  }
+}
