@@ -1,5 +1,5 @@
-import { app, BrowserWindow, remote } from 'electron'
-  
+import { app, BrowserWindow, remote, session } from 'electron'
+
   // Keep a global reference of the window object, if you don't, the window will
   // be closed automatically when the JavaScript object is garbage collected.
   let win
@@ -26,7 +26,18 @@ import { app, BrowserWindow, remote } from 'electron'
   // This method will be called when Electron has finished
   // initialization and is ready to create browser windows.
   // Some APIs can only be used after this event occurs.
-  app.on('ready', createWindow)
+  app.on('ready', () => {
+    // FIXME: electron security warning not fixed by below
+    // session.defaultSession.webRequest.onHeadersReceived((details, callback) => {
+    //   callback({
+    //     responseHeaders: {
+    //       ...details.responseHeaders,
+    //       'Content-Security-Policy': ['default-src \'none\'']
+    //     }
+    //   })
+    // })
+    createWindow()
+  })
   
   // Quit when all windows are closed.
   app.on('window-all-closed', () => {

@@ -1,10 +1,12 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const CleanWebpackPlugin = require('clean-webpack-plugin')
 const path = require('path')
 const webpack = require('webpack')
+const config = require('./webpack-shared')
 
 module.exports = [{
-  watch: true,
-  entry: { desktop: "./src/entry/index.desktop.js", },
+  //watch: true,
+  entry: { desktop: path.join(__dirname, "..", "src", "entry", "index.desktop.js") },
   output: {
       path: path.join(__dirname, "..", "dist"),
       filename: "bundle.[name].js",
@@ -14,33 +16,22 @@ module.exports = [{
     __filename: false,
   },
   module: {
-      rules: [
-          {
-              test: /\.js$/,
-              include: [/src/, /node_modules\/react-.*/],
-              loader: 'babel-loader',
-              options: {
-                  envName: 'dev-desktop',
-              }
-          }
-      ]
+      rules: [config.rules.typescriptFor('dev-desktop'), config.rules.javascriptFor('dev-desktop')]
   },
   mode: 'development',
   target: 'electron-main',
   resolve: {
-      extensions: [ '.desktop.js', '.js' ]
+      extensions: config.extensionsFor(['.desktop', ''])
   },
   plugins: [
-    new webpack.DefinePlugin({
-        __DEV__: JSON.stringify(true),
-      })
+    new CleanWebpackPlugin([path.join(__dirname, "..", "dist")]),
   ]
  },
  {
-    watch: true,
-    entry: { web: "./src/entry/index.web.js", }, // FIXME
+    //watch: true,
+    entry: { web: path.join(__dirname, "..", "src", "entry", "index.web.js") },
     output: {
-      path: path.join(__dirname, "dist"),
+      path: path.join(__dirname, "..", "dist"),
       filename: "bundle.[name].js"
     },
     node: {
@@ -48,34 +39,17 @@ module.exports = [{
         __filename: false,
     },
     module: {
-        rules: [
-            {
-                test: /\.js$/,
-                include: [/src/, /node_modules\/react-.*/],
-                loader: 'babel-loader',
-                options: {
-                    envName: 'dev-desktop',
-                }
-            }
-        ]
+        rules: [ config.rules.typescriptFor('dev-desktop'), config.rules.javascriptFor('dev-desktop') ]
     },
     mode: 'development',
     target: 'electron-renderer',
     resolve: {
-        extensions: [ '.web.js' ,'.js' ]
+        extensions: config.extensionsFor(['.web', ''])
     },
     plugins: [
       new HtmlWebpackPlugin({
         filename: "index.desktop.html",
-        template: "./src/index.html",
-      }),
-      new webpack.DefinePlugin({
-        'process.env': {
-            NODE_ENV: JSON.stringify('development')
-        }
-      }),
-      new webpack.ProvidePlugin({
-        React: 'react',
-      })      
+        template: path.join(__dirname, "..", "src", "index.html"),
+      }),    
     ],
 },]

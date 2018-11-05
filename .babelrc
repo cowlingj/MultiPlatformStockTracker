@@ -10,7 +10,7 @@
         }]
       ],
       "plugins": [
-        ["module-resolver", {"alias": {"^react-native$": "react-native-web"}}],
+        ["module-resolver", {"alias": {"^react-native$": "react-native-web"}}]
       ]
     },
     "prod-web": {},
@@ -23,8 +23,6 @@
         }]
       ],
       "plugins": [
-        "@babel/plugin-proposal-class-properties",
-        "@babel/plugin-proposal-object-rest-spread",
         ["module-resolver", {"alias": {"^react-native$": "react-native-electron"}}]
       ]
     },

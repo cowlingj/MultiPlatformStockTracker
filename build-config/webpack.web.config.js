@@ -1,40 +1,28 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const CleanWebpackPlugin = require('clean-webpack-plugin')
 const path = require('path')
+const config = require('./webpack-shared')
 
 module.exports = {
-  //watch: true,
-  entry: "./src/entry/index.web.js",
+  // TODO: reload on change below and watchamn 
+  // watch: true,
+  entry: path.join(__dirname, "..", "src", "entry", "index.web.js"),
   output: {
       path: path.join(__dirname, "..", "dist"),
       filename: "bundle.js"
   },
   module: {
-      rules: [
-        {
-            test: /\.tsx?$/,
-            use: [{
-                loader: 'babel-loader',
-            },
-            {
-                loader: "ts-loader",
-                options: { "configFile": path.resolve(__dirname, "tsconfig.json") }
-            }],
-            include: [ /src/ ]
-        },
-        {
-            test: /\.js$/,
-            include: [ /src/ ],
-            loader: 'babel-loader',
-        }
-      ]
+      rules: [ config.rules.typescriptFor("dev-web"), config.rules.javascriptFor("dev-web")]
   },
   resolve: {
-      extensions: [ 'web.tsx', 'web.ts', '.web.js', '.tsx', '.ts', '.js', '.json' ]
+      extensions: config.extensionsFor([".web", ""])
   },
   plugins: [
+    // TODO: not working?
+    new CleanWebpackPlugin([path.join(__dirname, "..", "dist")], { verbose: true }),
     new HtmlWebpackPlugin({
       filename: "index.html",
-      template: "./src/index.html"
+      template: path.join(__dirname, "..", "src", "index.html")
     })
   ]
  }
