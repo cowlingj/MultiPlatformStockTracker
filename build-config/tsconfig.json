@@ -3,5 +3,20 @@
     "sourceMap": true,
     "jsx": "preserve"
   },
-  "include": ["../src/**/*"]
+  "include": ["../src/**/*"],
+  "moduleResolution": {
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "noImplicitAny": true,
+    "strictFunctionTypes": true,
+    "noImplicitThis": true,
+    "alwaysStrict": true,
+    "noImplicitReturns": true,
+    "noUnusedParameters": true,
+    "noUnusedLocals": true,
+    "strictPropertyInitialization": true,
+    "strictNullChecks": true,
+    "noFallthroughCasesInSwitch": true
+  }
 }
