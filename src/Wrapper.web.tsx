@@ -1,9 +1,8 @@
 import { View } from 'react-native'
-import React from 'react'
 import App from './App'
 
-export default  () => (
+export default (): JSX.Element => (
   <View style={{height: '100vh', width: '100vw'}}>
-    <App style={{top: 0, left: 0}}/>
+    <App/>
   </View>
 )

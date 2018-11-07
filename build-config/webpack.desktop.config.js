@@ -5,8 +5,7 @@ const webpack = require('webpack')
 const config = require('./webpack-shared')
 
 module.exports = [{
-  //watch: true,
-  entry: { desktop: path.join(__dirname, "..", "src", "entry", "index.desktop.js") },
+  entry: { desktop: path.join(__dirname, "..", "src", "entry", "index.desktop.ts") },
   output: {
       path: path.join(__dirname, "..", "dist"),
       filename: "bundle.[name].js",
@@ -24,11 +23,16 @@ module.exports = [{
       extensions: config.extensionsFor(['.desktop', ''])
   },
   plugins: [
-    new CleanWebpackPlugin([path.join(__dirname, "..", "dist")]),
+    new webpack.ProvidePlugin({
+        React: 'react',
+    }),      
+    new CleanWebpackPlugin([path.join(__dirname, "..", "dist")], {
+        verbose: true,
+        root: path.join(__dirname, "..")
+    }),
   ]
  },
  {
-    //watch: true,
     entry: { web: path.join(__dirname, "..", "src", "entry", "index.web.js") },
     output: {
       path: path.join(__dirname, "..", "dist"),

@@ -1,8 +1,8 @@
-import { app, BrowserWindow, remote, session } from 'electron'
+import { app, BrowserWindow, /*remote, session*/ } from 'electron'
 
   // Keep a global reference of the window object, if you don't, the window will
   // be closed automatically when the JavaScript object is garbage collected.
-  let win
+  let win: BrowserWindow|null
   
   function createWindow () {
     win = new BrowserWindow({
