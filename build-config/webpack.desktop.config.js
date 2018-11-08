@@ -22,10 +22,7 @@ module.exports = [{
   resolve: {
       extensions: config.extensionsFor(['.desktop', ''])
   },
-  plugins: [
-    new webpack.ProvidePlugin({
-        React: 'react',
-    }),      
+  plugins: [   
     new CleanWebpackPlugin([path.join(__dirname, "..", "dist")], {
         verbose: true,
         root: path.join(__dirname, "..")
@@ -33,7 +30,7 @@ module.exports = [{
   ]
  },
  {
-    entry: { web: path.join(__dirname, "..", "src", "entry", "index.web.js") },
+    entry: { web: path.join(__dirname, "..", "src", "entry", "index.web.ts") },
     output: {
       path: path.join(__dirname, "..", "dist"),
       filename: "bundle.[name].js"
@@ -51,6 +48,9 @@ module.exports = [{
         extensions: config.extensionsFor(['.web', ''])
     },
     plugins: [
+      new webpack.ProvidePlugin({
+        React: 'react',
+      }),   
       new HtmlWebpackPlugin({
         filename: "index.desktop.html",
         template: path.join(__dirname, "..", "src", "index.html"),

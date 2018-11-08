@@ -21,7 +21,6 @@
     "strictPropertyInitialization": true,
     "strictNullChecks": true,
     "noFallthroughCasesInSwitch": true,
-    "outDir": "../dist"
   },
   "include": ["../src/**/*", "./jsx-config.tsx"],
 }
