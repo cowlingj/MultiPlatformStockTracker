@@ -12,7 +12,9 @@
       "object-literal-sort-keys": true, 
       "member-ordering": true, 
       "jsx-no-lambda" : true, 
-      "jsx-boolean-value" : true
+      "jsx-boolean-value" : true,
+      "interface-name": [true, "never-prefix"],
+      "no-namespace": [true, "allow-declarations"]
     },
     "rulesDirectory" :  []
   }
