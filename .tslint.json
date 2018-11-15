@@ -3,18 +3,31 @@
     "extends" : [
       "tslint:recommended", 
       "tslint-config-standard", 
-      "tslint-react", 
+      "tslint-react",
       "tslint-config-prettier"
     ], 
-    "jsRules": {},
-    "rules": { 
-      "ordered-imports" : true, 
-      "object-literal-sort-keys": true, 
-      "member-ordering": true, 
-      "jsx-no-lambda" : true, 
-      "jsx-boolean-value" : true,
+    "rules": {
+      "deprecation": true,
+      "await-promise": true,
+      "no-floating-promises": true,
+      "no-unnecessary-qualifier": true,
+      "no-unnecessary-type-assertion": true,
+      "strict-type-predicates": true,
+      "ordered-imports" : false, 
+      "object-literal-sort-keys": false, 
+      "jsx-no-lambda" : false, 
+      "jsx-boolean-value" : false,
       "interface-name": [true, "never-prefix"],
-      "no-namespace": [true, "allow-declarations"]
+      "no-namespace": [true, "allow-declarations"],
+      "member-ordering": false
+    },
+    "jsRules": {
+      "deprecation": true,
+      "ordered-imports" : false, 
+      "object-literal-sort-keys": false, 
+      "jsx-no-lambda" : false, 
+      "jsx-boolean-value" : false,
+      "member-ordering": false
     },
     "rulesDirectory" :  []
   }

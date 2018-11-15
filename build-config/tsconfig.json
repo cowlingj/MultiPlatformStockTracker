@@ -2,12 +2,10 @@
   "compilerOptions": {
     "sourceMap": true,
     "jsx": "preserve",
-    "typeRoots": [
-      "../node_modules/@types"
-    ],
-    "allowJs": false,
+    "typeRoots": ["../node_modules/@types"],
+    "allowJs": true,
     "target": "es5",
-    "module": "commonjs", 
+    "module": "commonjs",
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "resolveJsonModule": true,
@@ -20,7 +18,7 @@
     "noUnusedLocals": true,
     "strictPropertyInitialization": true,
     "strictNullChecks": true,
-    "noFallthroughCasesInSwitch": true,
+    "noFallthroughCasesInSwitch": true
   },
-  "include": ["../src/**/*", "./jsx-config.tsx"],
+  "include": ["../src/**/*", "../index.js", "./jsx-config.tsx"]
 }
