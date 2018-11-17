@@ -33,6 +33,5 @@ buck-out/
 *.jsbundle
 *.bundle.js
 
-# User libs
-lib/
+# output dir
 dist/
