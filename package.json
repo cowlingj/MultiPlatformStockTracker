@@ -5,10 +5,6 @@
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "clean": "rm -r dist",
-    "postinstall": "echo 'installing watchman locally...' && scripts/install-watchman.sh",
-    "watchman": "lib/bin/watchman $@",
-    "watchman-make": "lib/bin/watchman-make $@",
-    "watchman-build": "lib/bin/watchman-build $@",
     "android": "node node_modules/react-native/local-cli/cli.js run-android --config $(pwd)/build-config/rn-cli.config.js",
     "ios": "node node_modules/react-native/local-cli/cli.js run-ios --config $(pwd)/build-config/rn-cli.config.js",
     "web": "webpack --config build-config/webpack.web.config.js --mode development && URL=dist/index.html scripts/launch-web.sh",
