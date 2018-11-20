@@ -1,4 +1,6 @@
-{ 
+module.exports = function(api) {
+  api.cache(() => process.env.BABEL_ENV);
+  return { 
   "presets": ["module:metro-react-native-babel-preset"],
   "env": {
     "dev-web": {
@@ -28,4 +30,4 @@
     },
     "prod-desktop": {}
   }
-}
+}}
