@@ -11,8 +11,8 @@
     "desktop": "webpack --config build-config/webpack.desktop.config.js --mode development && electron ./dist/bundle.desktop.js",
     "react-native": "node node_modules/react-native/local-cli/cli.js $@",
     "cmd": "node_modules/.bin/$@",
-    "test": "jest --config test/jest.config.json",
-    "pretty": "prettier --write --config 'prettierrc.json' --ignore-path '.prettierignore' * {src,test,build-config}/**/*",
+    "test-web": "BABEL_ENV='dev-web' jest --config test/jest.config.json",
+    "pretty": "prettier --write --config 'prettierrc.json' --ignore-path '.prettierignore' * {src,test,build-config}/**",
     "lint": "tslint --project './build-config/tsconfig.json' --config './.tslint.json' *.{js,ts,jsx,tsx} {src,test,build-config}/**/*.{js,ts,jsx,tsx}"
   },
   "dependencies": {

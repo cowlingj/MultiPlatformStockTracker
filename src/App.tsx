@@ -1,42 +1,34 @@
-import * as React from 'react'
-import { Platform, StyleSheet, Text, View } from 'react-native'
+/** @format */
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
-  android:
-    'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-  web: 'Press Ctrl+R to refresh'
-})
+import * as React from "react"
+import { Text, View } from "react-native"
 
-export default class App extends React.Component {
-  public render () {
+interface AppState {
+  item: {
+    name: string
+    quantity: number
+  }
+}
+
+export default class App extends React.Component<{}, AppState> {
+  constructor(props: any) {
+    super(props)
+    this.state = {
+      item: {
+        name: "glass",
+        quantity: 0,
+      },
+    }
+  }
+
+  public render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to React Native!</Text>
-        <Text style={styles.instructions}>Your platform is: {Platform.OS}</Text>
-        <Text style={styles.instructions}>{instructions}</Text>
+      <View>
+        <Text>
+          <Text>{this.state.item.name}: </Text>
+          <Text>{this.state.item.quantity}</Text>
+        </Text>
       </View>
     )
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    margin: '10%',
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF'
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5
-  }
-})

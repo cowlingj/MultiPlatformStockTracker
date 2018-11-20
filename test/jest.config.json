@@ -1,6 +1,16 @@
 {
-  "name": "multi-platform-stock-tracker",
-  "jest": {
-    "preset": "react-native"
-  }
+  "preset": "react-native",
+  "rootDir": "..",
+  "transform": {
+    "^.+\\.(j|t)sx?$": "<rootDir>/node_modules/react-native/jest/preprocessor.js"
+  },
+  "testRegex": "/test/.*\\.tsx?$",
+  "moduleFileExtensions": [
+    "ts",
+    "tsx",
+    "js",
+    "jsx",
+    "json",
+    "node"
+  ]
 }

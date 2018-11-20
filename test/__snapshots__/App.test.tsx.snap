@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`app matches snapshot 1`] = `
+<View>
+  <Text>
+    <Text>
+      glass
+      : 
+    </Text>
+    <Text>
+      0
+    </Text>
+  </Text>
+</View>
+`;
