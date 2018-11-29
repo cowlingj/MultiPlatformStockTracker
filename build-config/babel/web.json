@@ -1,0 +1,28 @@
+{
+  "all": {
+    "presets": [],
+    "plugins": [
+      ["module-resolver", {"alias": {"^react-native$": "react-native-web"}}]
+    ]
+  },
+  "dev": {
+    "presets": [
+      [ "@babel/env", {
+        "targets": " >0.1%",
+        "debug": true,
+        "useBuiltIns": "usage"
+      }]
+    ],
+    "plugins": []
+  },
+  "prod": {
+    "presets": [
+      [ "@babel/env", {
+        "targets": " >0.1%",
+        "debug": false,
+        "useBuiltIns": "usage"
+      }]
+    ],
+    "plugins": []
+  }
+}

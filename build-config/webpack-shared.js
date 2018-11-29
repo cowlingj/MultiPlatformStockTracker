@@ -3,39 +3,29 @@
 const path = require("path")
 
 module.exports.rules = {
-  typescriptFor(envName) {
-    return {
-      test: /\.tsx?$/,
-      use: [
-        {
-          loader: "babel-loader",
-          options: {
-            envName: envName,
-          },
+  typescript: {
+    test: /\.tsx?$/,
+    use: [
+      {
+        loader: "babel-loader",
+      },
+      {
+        loader: "ts-loader",
+        options: {
+          configFile: path.resolve(__dirname, "tsconfig.json"),
         },
-        {
-          loader: "ts-loader",
-          options: {
-            configFile: path.resolve(__dirname, "tsconfig.json"),
-          },
-        },
-      ],
-      include: [/src/],
-    }
+      },
+    ],
+    include: [/src/],
   },
-  javascriptFor(envName) {
-    return {
-      test: /\.js$/,
-      include: [/src/],
-      use: [
-        {
-          loader: "babel-loader",
-          options: {
-            envName: envName,
-          },
-        },
-      ],
-    }
+  javascript: {
+    test: /\.js$/,
+    include: [/src/],
+    use: [
+      {
+        loader: "babel-loader",
+      },
+    ],
   },
 }
 

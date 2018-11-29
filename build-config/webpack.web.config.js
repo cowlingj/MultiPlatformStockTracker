@@ -13,10 +13,7 @@ module.exports = {
     filename: "bundle.js",
   },
   module: {
-    rules: [
-      config.rules.typescriptFor("dev-web"),
-      config.rules.javascriptFor("dev-web"),
-    ],
+    rules: [config.rules.typescript, config.rules.javascript],
   },
   resolve: {
     extensions: config.extensionsFor([".web", ""]),

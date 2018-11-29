@@ -1,0 +1,14 @@
+{
+  "all": {
+    "presets": ["module:metro-react-native-babel-preset"],
+    "plugins": ["@babel/plugin-proposal-class-properties"]
+  },
+  "dev": {
+    "presets": [],
+    "plugins": []
+  },
+  "prod": {
+    "presets": [],
+    "plugins": []
+  }
+}

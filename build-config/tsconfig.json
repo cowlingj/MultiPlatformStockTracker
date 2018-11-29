@@ -20,5 +20,10 @@
     "strictNullChecks": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["../src/**/*", "../index.js", "./jsx-config.tsx"]
+  "include": [
+    "../src/**/*",
+    "../index.js",
+    "./jsx-config.tsx",
+    "../babel.config.js"
+  ]
 }

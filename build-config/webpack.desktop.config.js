@@ -20,10 +20,7 @@ module.exports = [
       __filename: false,
     },
     module: {
-      rules: [
-        config.rules.typescriptFor("dev-desktop"),
-        config.rules.javascriptFor("dev-desktop"),
-      ],
+      rules: [config.rules.typescript, config.rules.javascript],
     },
     mode: "development",
     target: "electron-main",
@@ -48,10 +45,7 @@ module.exports = [
       __filename: false,
     },
     module: {
-      rules: [
-        config.rules.typescriptFor("dev-desktop"),
-        config.rules.javascriptFor("dev-desktop"),
-      ],
+      rules: [config.rules.typescript, config.rules.javascript],
     },
     mode: "development",
     target: "electron-renderer",

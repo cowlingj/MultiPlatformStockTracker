@@ -5,13 +5,13 @@
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "clean": "rm -r dist",
-    "android": "node node_modules/react-native/local-cli/cli.js run-android --config $(pwd)/build-config/rn-cli.config.js",
-    "ios": "node node_modules/react-native/local-cli/cli.js run-ios --config $(pwd)/build-config/rn-cli.config.js",
-    "web": "webpack --config build-config/webpack.web.config.js --mode development && URL=dist/index.html scripts/launch-web.sh",
-    "desktop": "webpack --config build-config/webpack.desktop.config.js --mode development && electron ./dist/bundle.desktop.js",
+    "android": "ENV='dev' PLATFORM='native' node node_modules/react-native/local-cli/cli.js run-android --config $(pwd)/build-config/rn-cli.config.js",
+    "ios": "ENV='dev' PLATFORM='native' node node_modules/react-native/local-cli/cli.js run-ios --config $(pwd)/build-config/rn-cli.config.js",
+    "web": "ENV='dev' PLATFORM='web' webpack --config build-config/webpack.web.config.js --mode development && URL=dist/index.html scripts/launch-web.sh",
+    "desktop": "ENV='dev' PLATFORM='desktop' webpack --config build-config/webpack.desktop.config.js --mode development && electron ./dist/bundle.desktop.js",
     "react-native": "node node_modules/react-native/local-cli/cli.js $@",
     "cmd": "node_modules/.bin/$@",
-    "test-web": "BABEL_ENV='dev-web' jest --config test/jest.config.json",
+    "test-web": "ENV='dev' PLATFORM='web' jest --config test/jest.config.json --no-cache",
     "pretty": "prettier --write --config 'prettierrc.json' --ignore-path '.prettierignore' * {src,test,build-config}/**",
     "lint": "tslint --project './build-config/tsconfig.json' --config './.tslint.json' *.{js,ts,jsx,tsx} {src,test,build-config}/**/*.{js,ts,jsx,tsx}"
   },

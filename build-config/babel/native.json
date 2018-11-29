@@ -1,0 +1,14 @@
+{
+  "all": {
+    "presets": [],
+    "plugins": []
+  },
+  "dev": {
+    "presets": [],
+    "plugins": []
+  },
+  "prod": {
+    "presets": [],
+    "plugins": []
+  }
+}
