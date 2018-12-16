@@ -13,6 +13,9 @@ npm-debug.log
 yarn-error.log
 package-lock.json
 
+# test snapshots
+*.snap
+
 # BUCK
 buck-out/
 \.buckd/**/*

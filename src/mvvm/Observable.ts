@@ -1,9 +1,10 @@
-import Observer from "./Observer";
+/** @format */
+
+import Observer from "./Observer"
 
 export default class Observable<M> {
+  private observers: Array<Observer<M> | null>
 
-  private observers: Array<Observer<M>|null>
-  
   constructor() {
     this.observers = new Array()
   }
@@ -17,18 +18,20 @@ export default class Observable<M> {
   }
 
   public subscribe(observer: Observer<M>): number {
-    const possibleNullObserverIndex = this.observers.findIndex((val) => val === null )
-    
+    const possibleNullObserverIndex = this.observers.findIndex(
+      val => val === null
+    )
+
     if (possibleNullObserverIndex === -1) {
       return this.observers.push(observer)
     }
-    
+
     this.observers[possibleNullObserverIndex] = observer
     return possibleNullObserverIndex
   }
 
   public notify(message: M) {
-    this.observers.forEach((ob) => {
+    this.observers.forEach(ob => {
       if (ob !== null) {
         ob.onMessage(message)
       }

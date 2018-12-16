@@ -1,9 +1,11 @@
+/** @format */
+
 export interface Increment {
-  name: string,
+  name: string
   value: number
 }
 
 export interface Decrement {
-  name: string,
+  name: string
   value: number
 }

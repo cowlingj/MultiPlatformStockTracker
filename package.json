@@ -12,7 +12,7 @@
     "react-native": "node node_modules/react-native/local-cli/cli.js $@",
     "cmd": "node_modules/.bin/$@",
     "test-web": "ENV='dev' PLATFORM='web' jest --config test/jest.config.json --no-cache",
-    "pretty": "prettier --write --config 'prettierrc.json' --ignore-path '.prettierignore' * {src,test,build-config}/**",
+    "pretty": "prettier --write --config 'prettierrc.json' --ignore-path '.prettierignore' * {src,test,build-config}/**/*",
     "lint": "tslint --project './build-config/tsconfig.json' --config './.tslint.json' *.{js,ts,jsx,tsx} {src,test,build-config}/**/*.{js,ts,jsx,tsx}"
   },
   "dependencies": {
@@ -31,6 +31,7 @@
     "@babel/polyfill": "^7.0.0",
     "@babel/preset-env": "^7.1.0",
     "@babel/preset-flow": "^7.0.0",
+    "@types/jest": "^23.3.10",
     "@types/node": "^10.12.2",
     "@types/react": "^16.4.18",
     "@types/react-native": "^0.57.7",

@@ -5,26 +5,38 @@
   },
   "dev": {
     "presets": [
-      [ "@babel/env", {
-        "targets": " >0.1%",
-        "debug": true,
-        "useBuiltIns": "usage"
-      }]
+      [
+        "@babel/env",
+        {
+          "targets": " >0.1%",
+          "debug": false,
+          "useBuiltIns": "usage"
+        }
+      ]
     ],
     "plugins": [
-      ["module-resolver", {"alias": {"^react-native$": "react-native-electron"}}]
+      [
+        "module-resolver",
+        { "alias": { "^react-native$": "react-native-electron" } }
+      ]
     ]
   },
   "prod": {
     "presets": [
-      [ "@babel/env", {
-        "targets": " >0.1%",
-        "debug": false,
-        "useBuiltIns": "usage"
-      }]
+      [
+        "@babel/env",
+        {
+          "targets": " >0.1%",
+          "debug": false,
+          "useBuiltIns": "usage"
+        }
+      ]
     ],
     "plugins": [
-      ["module-resolver", {"alias": {"^react-native$": "react-native-electron"}}]
+      [
+        "module-resolver",
+        { "alias": { "^react-native$": "react-native-electron" } }
+      ]
     ]
   }
 }
