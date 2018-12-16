@@ -35,3 +35,6 @@ buck-out/
 
 # output dir
 dist/
+
+# vscode
+*.code-workspace
