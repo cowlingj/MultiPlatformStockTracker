@@ -1,11 +1,20 @@
 /** @format */
 
 export interface Increment {
-  name: string
-  value: number
+  id: number
+  quantity: number
 }
 
 export interface Decrement {
+  id: number
+  quantity: number
+}
+
+export interface AddItem {
   name: string
-  value: number
+  quantity: number
+}
+
+export interface RemoveItem {
+  id: number
 }

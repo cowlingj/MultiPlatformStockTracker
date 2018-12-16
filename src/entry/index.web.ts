@@ -1,7 +1,7 @@
 /** @format */
 
 import { AppRegistry } from "react-native"
-import App from "../Wrapper"
+import App from "./Wrapper"
 
 AppRegistry.registerComponent("web", () => App)
 
