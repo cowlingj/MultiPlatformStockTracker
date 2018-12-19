@@ -25,6 +25,7 @@
     "../src/**/*",
     "../index.js",
     "./jsx-config.tsx",
-    "../babel.config.js"
+    "../babel.config.js",
+    "../*.js"
   ]
 }

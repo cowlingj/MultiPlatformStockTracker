@@ -18,3 +18,5 @@ export interface AddItem {
 export interface RemoveItem {
   id: number
 }
+
+export interface Init {}

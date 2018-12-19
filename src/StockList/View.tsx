@@ -2,37 +2,30 @@
 
 import * as React from "react"
 import { Text, View, Button } from "react-native"
-import StockListVM from "./ViewModel"
-import { Port } from "./Port";
-import { Increment, Decrement, AddItem, RemoveItem } from "./Message";
-
-export interface ItemState {
-  items: Array<{
-    id: number
-    name: string
-    quantity: number
-  }>
-}
+import Dispatcher from "./Dispatcher"
+import { Store, StockListState } from "./Store"
+import { Increment, Decrement, AddItem, RemoveItem, Init } from "./Messages"
 
 interface Props {
-  inc: Port<Increment>
-  dec: Port<Decrement>
-  add: Port<AddItem>
-  del: Port<RemoveItem>
+  inc: Store<Increment>
+  dec: Store<Decrement>
+  add: Store<AddItem>
+  del: Store<RemoveItem>
+  init: Store<Init>
 }
 
-export default class App extends React.Component<Props, ItemState> {
-  private viewModel: StockListVM
+export default class App extends React.Component<Props, StockListState> {
+  private dispatcher: Dispatcher
 
   constructor(props: Props) {
     super(props)
-    // get initial state from port
-    this.state = { items: [{ id: 0, name: "glass", quantity: 10 }] }
 
-    this.viewModel = new StockListVM(
-      props.inc.apply(() => this.state, (state) => this.setState(state)),
-      props.dec.apply(() => this.state, (state) => this.setState(state)),
-      props.add.apply(() => this.state, (state) => this.setState(state))
+    this.dispatcher = new Dispatcher(
+      props.inc.apply(state => this.setState(state)),
+      props.dec.apply(state => this.setState(state)),
+      props.add.apply(state => this.setState(state)),
+      props.del.apply(state => this.setState(state)),
+      props.init.apply(state => this.state = state)
     )
   }
 
@@ -40,31 +33,34 @@ export default class App extends React.Component<Props, ItemState> {
     return (
       <View>
         {this.state.items.map(item => (
-          <View key={item.name}>
+          <View key={item.id}>
             <Text>
-              <Text>{item.name}: </Text>
+              <Text>{item.name} [{item.id}]: </Text>
               <Text>{item.quantity}</Text>
             </Text>
             <Button
               onPress={() => {
-                this.viewModel.inc(item.id, item.quantity)
+                this.dispatcher.inc(item.id, item.quantity)
               }}
               title='INCREMENT'
             />
             <Button
               onPress={() => {
-                this.viewModel.dec(item.id, item.quantity)
+                this.dispatcher.dec(item.id, item.quantity)
               }}
               title='DECREMENT'
             />
+            <Button onPress={() => {this.dispatcher.del(item.id)}} title="DELETE" />
           </View>
         ))}
+        <View>
         <Button
           onPress={() => {
-            this.viewModel.add("New Item")
+            this.dispatcher.add("New Item")
           }}
           title='ADD'
         />
+        </View>
       </View>
     )
   }
