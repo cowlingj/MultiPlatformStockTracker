@@ -1,33 +1,34 @@
 {
-    "defaultSeverity" :  "error",
-    "extends" : [
-      "tslint:recommended", 
-      "tslint-config-standard", 
-      "tslint-react",
-      "tslint-config-prettier"
-    ], 
-    "rules": {
-      "deprecation": true,
-      "await-promise": true,
-      "no-floating-promises": true,
-      "no-unnecessary-qualifier": true,
-      "no-unnecessary-type-assertion": true,
-      "strict-type-predicates": true,
-      "ordered-imports" : false, 
-      "object-literal-sort-keys": false, 
-      "jsx-no-lambda" : false, 
-      "jsx-boolean-value" : false,
-      "interface-name": [true, "never-prefix"],
-      "no-namespace": [true, "allow-declarations"],
-      "member-ordering": false
-    },
-    "jsRules": {
-      "deprecation": true,
-      "ordered-imports" : false, 
-      "object-literal-sort-keys": false, 
-      "jsx-no-lambda" : false, 
-      "jsx-boolean-value" : false,
-      "member-ordering": false
-    },
-    "rulesDirectory" :  []
-  }
+  "defaultSeverity": "error",
+  "extends": [
+    "tslint:recommended",
+    "tslint-config-standard",
+    "tslint-react",
+    "tslint-config-prettier"
+  ],
+  "rules": {
+    "deprecation": true,
+    "await-promise": true,
+    "no-floating-promises": true,
+    "no-unnecessary-qualifier": true,
+    "no-unnecessary-type-assertion": true,
+    "strict-type-predicates": true,
+    "ordered-imports": false,
+    "object-literal-sort-keys": false,
+    "jsx-no-lambda": false,
+    "jsx-boolean-value": false,
+    "interface-name": [true, "never-prefix"],
+    "no-namespace": [true, "allow-declarations"],
+    "member-ordering": false,
+    "no-empty-interface": false
+  },
+  "jsRules": {
+    "deprecation": true,
+    "ordered-imports": false,
+    "object-literal-sort-keys": false,
+    "jsx-no-lambda": false,
+    "jsx-boolean-value": false,
+    "member-ordering": false
+  },
+  "rulesDirectory": []
+}

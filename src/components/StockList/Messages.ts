@@ -10,13 +10,13 @@ export interface Decrement {
   quantity: number
 }
 
+export interface RemoveItem {
+  id: number
+}
+
 export interface AddItem {
   name: string
   quantity: number
-}
-
-export interface RemoveItem {
-  id: number
 }
 
 export interface Init {}

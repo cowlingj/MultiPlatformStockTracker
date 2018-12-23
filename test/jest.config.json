@@ -1,4 +1,5 @@
 {
+  "setupFiles": [ "jest-canvas-mock" ],
   "preset": "react-native",
   "rootDir": "..",
   "transform": {

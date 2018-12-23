@@ -5,6 +5,14 @@ ios/
 # bash scripts
 scripts/
 
+# top level config files
+.buckconfig
+.editorconfig
+.gitattributes
+.gitignore
+.nvmrc
+.prettierignore
+.git/
 
 # node.js
 #
