@@ -4,5 +4,49 @@
 			"path": "."
 		}
 	],
-	"settings": {}
+	"settings": {},
+	"launch": {
+		"configurations": [
+			{
+				"type": "node",
+				"request": "launch",
+				"name": "unit tests",
+				"port": 9229,
+				"cwd": "${workspaceFolder}",
+				"runtimeArgs": [
+					"run",
+					"unit-test"
+				],
+				"runtimeExecutable": "npm",
+				"console": "integratedTerminal"
+			},
+			{
+				"type": "node",
+				"request": "launch",
+				"name": "ui tests",
+				"port": 9229,
+				"cwd": "${workspaceFolder}",
+				"runtimeArgs": [
+					"run",
+					"ui-test"
+				],
+				"runtimeExecutable": "npm",
+				"console": "integratedTerminal"
+			},
+			{
+				"type": "node",
+				"request": "launch",
+				"name": "sit tests",
+				"port": 9229,
+				"cwd": "${workspaceFolder}",
+				"runtimeArgs": [
+					"run",
+					"sit-test"
+				],
+				"runtimeExecutable": "npm",
+				"console": "integratedTerminal"
+			}
+		],
+		"compounds": []
+	}
 }

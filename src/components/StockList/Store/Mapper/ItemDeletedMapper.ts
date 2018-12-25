@@ -4,18 +4,34 @@ import { Mapper } from "../../../../archetecture/Store"
 import { RemoveItem } from "../../Messages"
 import { DataModel, itemsToDisplay } from ".."
 import { StockListState } from "../../Model"
+import IllegalOperationError from "../../../../util/error/IllegalOperationError";
+import IllegalStateError from "../../../../util/error/IllegalStateError";
 export class ItemDeletedMapper implements Mapper<RemoveItem, StockListState> {
-  private state: DataModel
-  constructor(state: DataModel) {
-    this.state = state
+  private model: DataModel
+  constructor(model: DataModel) {
+    this.model = model
   }
   public map(message: RemoveItem) {
-    const possibleIndex = this.state.items.findIndex(
+    const singletonArrayToDelete = this.model.state.items.filter(
       item => item.id === message.id
     )
-    if (possibleIndex !== -1) {
-      this.state.items[possibleIndex].inUse = false
+
+    if (singletonArrayToDelete.length < 1) {
+      throw new IllegalOperationError("no matching ids")
     }
-    return itemsToDisplay(this.state)
+
+    if (singletonArrayToDelete.length > 1) {
+      throw new IllegalStateError("multiple matching ids")
+    }
+
+    if (!singletonArrayToDelete[0].inUse) {
+      throw new IllegalOperationError(
+        "trying to update an item that's not in use"
+      )
+    }
+
+    singletonArrayToDelete[0].inUse = false
+
+    return itemsToDisplay(this.model.state)
   }
 }

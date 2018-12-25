@@ -1,0 +1,16 @@
+{
+  "setupFiles": ["jest-canvas-mock"],
+  "preset": "react-native",
+  "rootDir": "../..",
+  "transform": {
+    "^.+\\.(j|t)sx?$": "<rootDir>/node_modules/react-native/jest/preprocessor.js"
+  },
+  "testPathIgnorePatterns": [
+    "<rootDir>/node_modules/",
+    "<rootDir>/test/test-config/"
+  ],
+  "reporters": ["jest-spec-reporter"],
+  "testRegex": "/test/.*\\.unit\\.[tj]sx?$",
+  "moduleFileExtensions": ["ts", "tsx", "js", "jsx", "json", "node"],
+  "setupTestFrameworkScriptFile": "<rootDir>/test/test-config/setup.js"
+}

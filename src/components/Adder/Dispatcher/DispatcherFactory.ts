@@ -1,24 +1,15 @@
 /** @format */
 
 import { AddItem, Update, Init } from "../Messages"
-import Dispatcher from "./Dispatcher"
+import Dispatcher from "."
 import Observable from "../../../archetecture/observer/Observable"
 import Observer from "../../../archetecture/observer/Observer"
 
-export class DispatcherFactory {
-  private add: Observable<AddItem>
-  private update: Observable<Update>
-  private init: Observable<Init>
+export default class DispatcherFactory {
+  private add = new Observable<AddItem>()
+  private update = new Observable<Update>()
+  private init = new Observable<Init>()
 
-  constructor(
-    add: Observable<AddItem>,
-    update: Observable<Update>,
-    init: Observable<Init>
-  ) {
-    this.add = add
-    this.update = update
-    this.init = init
-  }
   public subcribeAdd(subscriber: Observer<AddItem>): number {
     return this.add.subscribe(subscriber)
   }

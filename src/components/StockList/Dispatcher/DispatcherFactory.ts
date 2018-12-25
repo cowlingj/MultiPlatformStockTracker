@@ -6,21 +6,11 @@ import Observable from "../../../archetecture/observer/Observable"
 import Observer from "../../../archetecture/observer/Observer"
 
 export default class DispatcherFactory {
-  private inc: Observable<Increment>
-  private dec: Observable<Decrement>
-  private del: Observable<RemoveItem>
-  private init: Observable<Init>
-  constructor(
-    inc: Observable<Increment>,
-    dec: Observable<Decrement>,
-    del: Observable<RemoveItem>,
-    init: Observable<Init>
-  ) {
-    this.inc = inc
-    this.dec = dec
-    this.del = del
-    this.init = init
-  }
+  private inc = new Observable<Increment>()
+  private dec = new Observable<Decrement>()
+  private del = new Observable<RemoveItem>()
+  private init = new Observable<Init>()
+
   public subscribeInc(subscriber: Observer<Increment>): number {
     return this.inc.subscribe(subscriber)
   }

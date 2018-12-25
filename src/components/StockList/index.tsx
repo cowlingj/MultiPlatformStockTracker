@@ -4,10 +4,12 @@ import * as React from "react"
 import { Text, View, Button } from "react-native"
 import Dispatcher from "./Dispatcher"
 import DispatcherFactory from "./Dispatcher/DispatcherFactory"
-import Adder, { Props as AdderProps } from "../Adder/View"
+import Adder from "../Adder"
 import { Store } from "../../archetecture/Store"
 import { Increment, Decrement, RemoveItem, Init, AddItem } from "./Messages"
 import { StockListState } from "./Model"
+import * as AdderStores from "../Adder/Store"
+import AdderDispatcherFactory from "../Adder/Dispatcher/DispatcherFactory"
 
 export interface Props {
   dispatcherFactory: DispatcherFactory
@@ -16,12 +18,11 @@ export interface Props {
   del: Store<RemoveItem, StockListState>
   init: Store<Init, StockListState>
   add: Store<AddItem, StockListState>
-
-  adder: AdderProps
 }
 
 export default class StockList extends React.Component<Props, StockListState> {
   private dispatcher: Dispatcher
+  private adderDispatcherFactory = new AdderDispatcherFactory()
 
   constructor(props: Props) {
     super(props)
@@ -29,7 +30,7 @@ export default class StockList extends React.Component<Props, StockListState> {
     const setState = this.setState.bind(this)
     const initialState = (state: StockListState) => (this.state = state)
 
-    props.adder.dispatcherFactory.subcribeAdd(props.add.apply(setState))
+    this.adderDispatcherFactory.subcribeAdd(props.add.apply(setState))
 
     props.dispatcherFactory.subscribeInc(props.inc.apply(setState))
     props.dispatcherFactory.subscribeDec(props.dec.apply(setState))
@@ -69,7 +70,14 @@ export default class StockList extends React.Component<Props, StockListState> {
             />
           </View>
         ))}
-        <Adder {...this.props.adder} />
+        <Adder
+          {...{
+            dispatcherFactory: this.adderDispatcherFactory,
+            add: AdderStores.itemAdded(),
+            update: AdderStores.update(),
+            init: AdderStores.initView(),
+          }}
+        />
       </View>
     )
   }

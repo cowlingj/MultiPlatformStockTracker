@@ -2,8 +2,8 @@
 
 import { View, Button, TextInput } from "react-native"
 import React from "react"
-import Dispatcher from "./Dispatcher/Dispatcher"
-import { DispatcherFactory } from "./Dispatcher/DispatcherFactory"
+import Dispatcher from "./Dispatcher"
+import DispatcherFactory from "./Dispatcher/DispatcherFactory"
 import { AddState } from "./Store"
 import { AddItem, Update, Init } from "./Messages"
 import { Store } from "../../archetecture/Store"
