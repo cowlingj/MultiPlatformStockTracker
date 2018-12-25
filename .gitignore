@@ -57,3 +57,5 @@ buck-out/
 
 # output dir
 dist/
+android/
+ios/

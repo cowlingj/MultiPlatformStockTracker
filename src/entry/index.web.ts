@@ -2,11 +2,12 @@
 
 import { AppRegistry } from "react-native"
 import App from "./Wrapper"
+import { name as appName } from "../../app.json"
 
-AppRegistry.registerComponent("web", () => App)
+AppRegistry.registerComponent(appName, () => App)
 
 if (window.document) {
-  AppRegistry.runApplication("web", {
+  AppRegistry.runApplication(appName, {
     initialProps: {},
     rootTag: document.getElementById("react-root"),
   })
