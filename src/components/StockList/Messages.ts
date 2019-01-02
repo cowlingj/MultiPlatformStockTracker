@@ -19,4 +19,9 @@ export interface AddItem {
   quantity: number
 }
 
+export interface HighLight {
+  id: number
+  isHighlighted: boolean
+}
+
 export interface Init {}

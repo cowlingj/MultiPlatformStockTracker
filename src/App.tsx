@@ -9,7 +9,9 @@ import {
   itemAdded,
   itemDeleted,
   initView,
+  itemHighLighted,
 } from "./components/StockList/Store"
+import { Platform } from "react-native";
 
 const model: DataModel = { state: { items: [] } }
 
@@ -19,8 +21,9 @@ export default () => (
       dispatcherFactory: new DispatcherFactory(),
       inc: quantChanged(model),
       dec: quantChanged(model),
-      add: itemAdded(model),
+      add: itemAdded(model, Platform.OS === "android" || Platform.OS === "ios"),
       del: itemDeleted(model),
+      highlight: itemHighLighted(model),
       init: initView(model),
     }}
   />

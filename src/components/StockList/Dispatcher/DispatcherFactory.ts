@@ -1,6 +1,6 @@
 /** @format */
 
-import { Increment, Decrement, RemoveItem, Init } from "../Messages"
+import { Increment, Decrement, RemoveItem, Init, HighLight } from "../Messages"
 import Dispatcher from "."
 import Observable from "../../../archetecture/observer/Observable"
 import Observer from "../../../archetecture/observer/Observer"
@@ -10,6 +10,7 @@ export default class DispatcherFactory {
   private dec = new Observable<Decrement>()
   private del = new Observable<RemoveItem>()
   private init = new Observable<Init>()
+  private highlight = new Observable<HighLight>()
 
   public subscribeInc(subscriber: Observer<Increment>): number {
     return this.inc.subscribe(subscriber)
@@ -23,7 +24,16 @@ export default class DispatcherFactory {
   public subscribeInit(subscriber: Observer<Init>): number {
     return this.init.subscribe(subscriber)
   }
+  public subscribeHighlight(subscriber: Observer<HighLight>) {
+    return this.highlight.subscribe(subscriber)
+  }
   public create(): Dispatcher {
-    return new Dispatcher(this.inc, this.dec, this.del, this.init)
+    return new Dispatcher(
+      this.inc,
+      this.dec,
+      this.del,
+      this.highlight,
+      this.init
+    )
   }
 }

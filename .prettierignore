@@ -49,3 +49,9 @@ dist/
 
 # vscode
 *.code-workspace
+
+# git
+.gitkeep
+
+# templates
+*.ejs

@@ -1,38 +1,36 @@
 /** @format */
 
 import { Mapper } from "../../../../archetecture/Store"
-import { Increment, Decrement } from "../../Messages"
+import { RemoveItem } from "../../Messages"
 import { DataModel, itemsToDisplay } from ".."
 import { StockListState } from "../../Model"
 import IllegalOperationError from "../../../../util/error/IllegalOperationError"
 import IllegalStateError from "../../../../util/error/IllegalStateError"
-
-export class QuantMapper
-  implements Mapper<Increment | Decrement, StockListState> {
+export default class implements Mapper<RemoveItem, StockListState> {
   private model: DataModel
   constructor(model: DataModel) {
     this.model = model
   }
-  public map(message: Increment | Decrement): StockListState {
-    const singletonArrayToUpdate = this.model.state.items.filter(
+  public map(message: RemoveItem) {
+    const singletonArrayToDelete = this.model.state.items.filter(
       item => item.id === message.id
     )
 
-    if (singletonArrayToUpdate.length < 1) {
+    if (singletonArrayToDelete.length < 1) {
       throw new IllegalOperationError("no matching ids")
     }
 
-    if (singletonArrayToUpdate.length > 1) {
+    if (singletonArrayToDelete.length > 1) {
       throw new IllegalStateError("multiple matching ids")
     }
 
-    if (!singletonArrayToUpdate[0].inUse) {
+    if (!singletonArrayToDelete[0].inUse) {
       throw new IllegalOperationError(
         "trying to update an item that's not in use"
       )
     }
 
-    singletonArrayToUpdate[0].quantity = message.quantity
+    singletonArrayToDelete[0].inUse = false
 
     return itemsToDisplay(this.model.state)
   }

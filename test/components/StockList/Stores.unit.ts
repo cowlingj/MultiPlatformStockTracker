@@ -40,32 +40,36 @@ describe("StockList Stores", () => {
         sinon.assert.calledWithExactly(callback.getCall(0), expected)
       })
       it("when initial state is a non empty list", () => {
-        const model: Store.DataModel = { state: { items: [
-          {
-            id: 0,
-            name: "hidden",
-            quantity: 0,
-            inUse: false,
+        const model: Store.DataModel = {
+          state: {
+            items: [
+              {
+                id: 0,
+                name: "hidden",
+                quantity: 0,
+                inUse: false,
+              },
+              {
+                id: 1,
+                name: "visible",
+                quantity: 0,
+                inUse: true,
+              },
+            ],
           },
-          {
-            id: 1,
-            name: "visible",
-            quantity: 0,
-            inUse: true,
-          },
-        ]}}
+        }
 
         const expected: StockListState = {
           items: [
             {
-              id: 1,
-              name: "visible",
-              quantity: 0,
-            },
-            {
               id: 0,
               name: "item",
               quantity: 2,
+            },
+            {
+              id: 1,
+              name: "visible",
+              quantity: 0,
             },
           ],
         }
@@ -83,20 +87,24 @@ describe("StockList Stores", () => {
         sinon.assert.calledWithExactly(callback.getCall(0), expected)
       })
       it("when quantChanged called first", () => {
-        const model: Store.DataModel = { state: { items: [
-          {
-            id: 0,
-            name: "hidden",
-            quantity: 0,
-            inUse: false,
+        const model: Store.DataModel = {
+          state: {
+            items: [
+              {
+                id: 0,
+                name: "hidden",
+                quantity: 0,
+                inUse: false,
+              },
+              {
+                id: 1,
+                name: "visible",
+                quantity: 0,
+                inUse: true,
+              },
+            ],
           },
-          {
-            id: 1,
-            name: "visible",
-            quantity: 0,
-            inUse: true,
-          },
-        ]}}
+        }
 
         const expected0: StockListState = {
           items: [
@@ -111,21 +119,23 @@ describe("StockList Stores", () => {
         const expected1: StockListState = {
           items: [
             {
-              id: 1,
-              name: "visible",
-              quantity: 10,
-            },
-            {
               id: 0,
               name: "item",
               quantity: 2,
+            },
+            {
+              id: 1,
+              name: "visible",
+              quantity: 10,
             },
           ],
         }
 
         const callback = sinon.stub()
 
-        Store.quantChanged(model).apply(callback).onMessage({id: 1, quantity: 10})
+        Store.quantChanged(model)
+          .apply(callback)
+          .onMessage({ id: 1, quantity: 10 })
 
         Store.itemAdded(model)
           .apply(callback)
@@ -142,23 +152,27 @@ describe("StockList Stores", () => {
   })
   describe("itemDeleted", () => {
     it("should flag the correct item deleted", () => {
-      const model: Store.DataModel = { state: { items: [
-        {
-          id: 0,
-          name: "hidden",
-          quantity: 0,
-          inUse: false,
+      const model: Store.DataModel = {
+        state: {
+          items: [
+            {
+              id: 0,
+              name: "hidden",
+              quantity: 0,
+              inUse: false,
+            },
+            {
+              id: 1,
+              name: "visible",
+              quantity: 0,
+              inUse: true,
+            },
+          ],
         },
-        {
-          id: 1,
-          name: "visible",
-          quantity: 0,
-          inUse: true,
-        },
-      ]}}
+      }
 
       const expected: StockListState = {
-        items: []
+        items: [],
       }
 
       const callback = sinon.stub()
@@ -173,48 +187,60 @@ describe("StockList Stores", () => {
       sinon.assert.calledWithExactly(callback.getCall(0), expected)
     })
     it("should throw an exception if given id is invalid", () => {
-           const model: Store.DataModel = { state: { items: [
-        {
-          id: 0,
-          name: "hidden",
-          quantity: 0,
-          inUse: false,
+      const model: Store.DataModel = {
+        state: {
+          items: [
+            {
+              id: 0,
+              name: "hidden",
+              quantity: 0,
+              inUse: false,
+            },
+            {
+              id: 1,
+              name: "visible",
+              quantity: 0,
+              inUse: true,
+            },
+          ],
         },
-        {
-          id: 1,
-          name: "visible",
-          quantity: 0,
-          inUse: true,
-        },
-      ]}}
+      }
 
       const callback = sinon.stub()
 
-      should.Throw(() => Store.itemDeleted(model)
-        .apply(callback)
-        .onMessage({
-          id: 0,
-        }), IllegalOperationError)
+      should.Throw(
+        () =>
+          Store.itemDeleted(model)
+            .apply(callback)
+            .onMessage({
+              id: 0,
+            }),
+        IllegalOperationError
+      )
 
       sinon.assert.callCount(callback, 0)
     })
   })
   describe("quantChanged", () => {
     it("should update the correct item", () => {
-      const model: Store.DataModel = { state: { items: [
-        {
-          id: 0,
-          name: "hidden",
-          quantity: 0,
-          inUse: false,
+      const model: Store.DataModel = {
+        state: {
+          items: [
+            {
+              id: 0,
+              name: "hidden",
+              quantity: 0,
+              inUse: false,
+            },
+            {
+              id: 1,
+              name: "visible",
+              quantity: 0,
+              inUse: true,
+            },
+          ],
         },
-        {
-          id: 1,
-          name: "visible",
-          quantity: 0,
-          inUse: true,
-        },
-      ]}}
+      }
 
       const expected: StockListState = {
         items: [
@@ -279,20 +305,24 @@ describe("StockList Stores", () => {
       sinon.assert.callCount(callback, 0)
     })
     it("should throw an exception if given id matches multiple items", () => {
-      const model: Store.DataModel = { state: { items: [
-        {
-          id: 0,
-          name: "hidden",
-          quantity: 0,
-          inUse: false,
+      const model: Store.DataModel = {
+        state: {
+          items: [
+            {
+              id: 0,
+              name: "hidden",
+              quantity: 0,
+              inUse: false,
+            },
+            {
+              id: 0,
+              name: "visible",
+              quantity: 0,
+              inUse: true,
+            },
+          ],
         },
-        {
-          id: 0,
-          name: "visible",
-          quantity: 0,
-          inUse: true,
-        },
-      ]}}
+      }
 
       const callback = sinon.stub()
 
@@ -301,7 +331,7 @@ describe("StockList Stores", () => {
           Store.quantChanged(model)
             .apply(callback)
             .onMessage({ id: 0, quantity: 0 }),
-            IllegalStateError
+        IllegalStateError
       )
 
       sinon.assert.callCount(callback, 0)
@@ -309,20 +339,24 @@ describe("StockList Stores", () => {
   })
   describe("initView", () => {
     it("should set the initial state", () => {
-      const model: Store.DataModel = { state: { items: [
-        {
-          id: 0,
-          name: "hidden",
-          quantity: 0,
-          inUse: false,
+      const model: Store.DataModel = {
+        state: {
+          items: [
+            {
+              id: 0,
+              name: "hidden",
+              quantity: 0,
+              inUse: false,
+            },
+            {
+              id: 1,
+              name: "visible",
+              quantity: 0,
+              inUse: true,
+            },
+          ],
         },
-        {
-          id: 1,
-          name: "visible",
-          quantity: 0,
-          inUse: true,
-        },
-      ]}}
+      }
 
       const expected: StockListState = {
         items: [

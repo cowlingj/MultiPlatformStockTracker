@@ -20,12 +20,21 @@ module.exports.rules = {
   },
   javascript: {
     test: /\.js$/,
-    include: [/src/],
+    include: [/src/, /node_modules\/react-native-vector-icons/],
     use: [
       {
         loader: "babel-loader",
       },
     ],
+  },
+  ttf: {
+    test: /\.ttf$/,
+    loader: "url-loader",
+    include: path.resolve(
+      __dirname,
+      "..",
+      "node_modules/react-native-vector-icons"
+    ),
   },
 }
 

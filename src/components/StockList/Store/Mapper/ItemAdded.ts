@@ -4,10 +4,13 @@ import { Mapper } from "../../../../archetecture/Store"
 import { AddItem } from "../../Messages"
 import { DataModel, DataItem, itemsToDisplay } from ".."
 import { StockListState } from "../../Model"
-export class ItemAddedMapper implements Mapper<AddItem, StockListState> {
+export default class implements Mapper<AddItem, StockListState> {
   private model: DataModel
-  constructor(model: DataModel) {
+  private isHighlightedDefault: boolean
+
+  constructor(model: DataModel, isHighlightedDefault: boolean) {
     this.model = model
+    this.isHighlightedDefault = isHighlightedDefault
   }
   public map(message: AddItem) {
     const possibleIndex = this.model.state.items.findIndex(item => !item.inUse)
@@ -15,10 +18,11 @@ export class ItemAddedMapper implements Mapper<AddItem, StockListState> {
     if (possibleIndex !== -1) {
       removed = this.model.state.items.splice(possibleIndex, 1)
     }
-    this.model.state.items.push({
+    this.model.state.items.unshift({
       id: removed.length > 0 ? removed[0].id : this.model.state.items.length,
       name: message.name,
       quantity: message.quantity,
+      isHighlited: this.isHighlightedDefault,
       inUse: true,
     })
     return itemsToDisplay(this.model.state)

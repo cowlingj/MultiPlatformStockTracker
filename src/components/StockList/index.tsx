@@ -1,15 +1,23 @@
 /** @format */
 
 import * as React from "react"
-import { Text, View, Button } from "react-native"
+import { View } from "react-native"
 import Dispatcher from "./Dispatcher"
 import DispatcherFactory from "./Dispatcher/DispatcherFactory"
 import Adder from "../Adder"
 import { Store } from "../../archetecture/Store"
-import { Increment, Decrement, RemoveItem, Init, AddItem } from "./Messages"
+import {
+  Increment,
+  Decrement,
+  RemoveItem,
+  Init,
+  AddItem,
+  HighLight,
+} from "./Messages"
 import { StockListState } from "./Model"
 import * as AdderStores from "../Adder/Store"
 import AdderDispatcherFactory from "../Adder/Dispatcher/DispatcherFactory"
+import StockListItem from "./StockListItem"
 
 export interface Props {
   dispatcherFactory: DispatcherFactory
@@ -18,6 +26,7 @@ export interface Props {
   del: Store<RemoveItem, StockListState>
   init: Store<Init, StockListState>
   add: Store<AddItem, StockListState>
+  highlight: Store<HighLight, StockListState>
 }
 
 export default class StockList extends React.Component<Props, StockListState> {
@@ -35,6 +44,7 @@ export default class StockList extends React.Component<Props, StockListState> {
     props.dispatcherFactory.subscribeInc(props.inc.apply(setState))
     props.dispatcherFactory.subscribeDec(props.dec.apply(setState))
     props.dispatcherFactory.subscribeDel(props.del.apply(setState))
+    props.dispatcherFactory.subscribeHighlight(props.highlight.apply(setState))
     props.dispatcherFactory.subscribeInit(props.init.apply(initialState))
     this.dispatcher = props.dispatcherFactory.create()
   }
@@ -42,34 +52,6 @@ export default class StockList extends React.Component<Props, StockListState> {
   public render() {
     return (
       <View>
-        {this.state.items.map(item => (
-          <View key={item.id}>
-            <Text>
-              <Text>
-                {item.name} [{item.id}]:{" "}
-              </Text>
-              <Text>{item.quantity}</Text>
-            </Text>
-            <Button
-              onPress={() => {
-                this.dispatcher.inc(item.id, item.quantity)
-              }}
-              title='INCREMENT'
-            />
-            <Button
-              onPress={() => {
-                this.dispatcher.dec(item.id, item.quantity)
-              }}
-              title='DECREMENT'
-            />
-            <Button
-              onPress={() => {
-                this.dispatcher.del(item.id)
-              }}
-              title='DELETE'
-            />
-          </View>
-        ))}
         <Adder
           {...{
             dispatcherFactory: this.adderDispatcherFactory,
@@ -78,6 +60,23 @@ export default class StockList extends React.Component<Props, StockListState> {
             init: AdderStores.initView(),
           }}
         />
+        {this.state.items.map(item => (
+          <StockListItem
+            key={item.id}
+            id={item.id}
+            name={item.name}
+            quantity={item.quantity}
+            inc={this.dispatcher.inc.bind(this.dispatcher)}
+            dec={this.dispatcher.dec.bind(this.dispatcher)}
+            del={this.dispatcher.del.bind(this.dispatcher)}
+            highlight={this.dispatcher.makeHighlighted.bind(this.dispatcher)}
+            unHighlight={this.dispatcher.makeUnhighlighted.bind(
+              this.dispatcher
+            )}
+            view={() => {}}
+            isHighlighted={item.isHighlited}
+          />
+        ))}
       </View>
     )
   }

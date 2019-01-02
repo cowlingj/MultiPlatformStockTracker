@@ -20,7 +20,11 @@ module.exports = [
       __filename: false,
     },
     module: {
-      rules: [config.rules.typescript, config.rules.javascript],
+      rules: [
+        config.rules.typescript,
+        config.rules.javascript,
+        config.rules.tiff,
+      ],
     },
     mode: "development",
     target: "electron-main",
@@ -45,7 +49,11 @@ module.exports = [
       __filename: false,
     },
     module: {
-      rules: [config.rules.typescript, config.rules.javascript],
+      rules: [
+        config.rules.typescript,
+        config.rules.javascript,
+        config.rules.tiff,
+      ],
     },
     mode: "development",
     target: "electron-renderer",

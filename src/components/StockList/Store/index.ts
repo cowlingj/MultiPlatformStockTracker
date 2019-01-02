@@ -1,11 +1,19 @@
 /** @format */
 
 import { Store } from "../../../archetecture/Store"
-import { Increment, Decrement, RemoveItem, Init, AddItem } from "../Messages"
+import {
+  Increment,
+  Decrement,
+  RemoveItem,
+  Init,
+  AddItem,
+  HighLight,
+} from "../Messages"
 import { StockListState, StockListItem } from "../Model"
-import { QuantMapper } from "./Mapper/QuantMapper"
-import { ItemAddedMapper } from "./Mapper/ItemAddedMapper"
-import { ItemDeletedMapper } from "./Mapper/ItemDeletedMapper"
+import QuantMapper from "./Mapper/QuantityChanged"
+import ItemAddedMapper from "./Mapper/ItemAdded"
+import ItemDeletedMapper from "./Mapper/ItemDeleted"
+import ItemHighLightedMapper from "./Mapper/ItemHighLighted"
 
 export interface DataItem extends StockListItem {
   id: number
@@ -32,14 +40,20 @@ export function quantChanged(
   return new Store(new QuantMapper(model))
 }
 
-export function itemAdded(model: DataModel): Store<AddItem, StockListState> {
-  return new Store(new ItemAddedMapper(model))
+export function itemAdded(model: DataModel, isHighlightedDefault: boolean): Store<AddItem, StockListState> {
+  return new Store(new ItemAddedMapper(model, isHighlightedDefault))
 }
 
 export function itemDeleted(
   model: DataModel
 ): Store<RemoveItem, StockListState> {
   return new Store<RemoveItem, StockListState>(new ItemDeletedMapper(model))
+}
+
+export function itemHighLighted(
+  model: DataModel
+): Store<HighLight, StockListState> {
+  return new Store<HighLight, StockListState>(new ItemHighLightedMapper(model))
 }
 
 export function initView(model: DataModel): Store<Init, StockListState> {
