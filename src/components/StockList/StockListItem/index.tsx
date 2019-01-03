@@ -32,6 +32,7 @@ export default (props: Props): React.ReactElement<Props> => {
           padding: 20,
           shadowOffset: { width: 0, height: 1 },
           shadowRadius: 1,
+          elevation: 1
         }}>
         <View
           style={{

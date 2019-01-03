@@ -33,13 +33,34 @@ export default class extends React.Component<Props, AddState> {
 
   public render() {
     return (
-      <View>
+      <View
+        style={{
+          backgroundColor: "ghostwhite",
+          borderRadius: 5,
+          borderColor: "grey",
+          borderWidth: 1,
+          padding: 20,
+          shadowOffset: { width: 0, height: 1 },
+          shadowRadius: 1,
+          elevation: 1
+        }}
+      >
         <TextInput
           autoCapitalize='sentences'
           autoCorrect={true}
           onSubmitEditing={() => this.dispatcher.add(this.state.name)}
           onChangeText={newText => this.dispatcher.update(newText)}
           value={this.state.name}
+          style={{
+            backgroundColor: "whitesmoke",
+            borderColor: "grey",
+            borderWidth: 1,
+            borderRadius: 5,
+            padding: ".5em",
+            marginBottom: "1%"
+          }}
+          placeholder="item name"
+          placeholderTextColor="grey"
         />
         <Button
           onPress={() => this.dispatcher.add(this.state.name)}
