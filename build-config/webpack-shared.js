@@ -3,23 +3,8 @@
 const path = require("path")
 
 module.exports.rules = {
-  typescript: {
-    test: /\.tsx?$/,
-    use: [
-      {
-        loader: "babel-loader",
-      },
-      {
-        loader: "ts-loader",
-        options: {
-          configFile: path.resolve(__dirname, "tsconfig.json"),
-        },
-      },
-    ],
-    include: [/src/],
-  },
-  javascript: {
-    test: /\.js$/,
+  babel: {
+    test: /\.[jt]sx?$/,
     include: [/src/, /node_modules\/react-native-vector-icons/],
     use: [
       {

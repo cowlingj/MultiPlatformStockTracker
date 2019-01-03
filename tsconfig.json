@@ -1,9 +1,7 @@
 {
   "compilerOptions": {
-    "lib": ["es2015", "dom"],
     "sourceMap": true,
     "jsx": "preserve",
-    "typeRoots": ["../node_modules/@types"],
     "allowJs": true,
     "target": "es5",
     "module": "commonjs",
@@ -19,13 +17,16 @@
     "noUnusedLocals": true,
     "strictPropertyInitialization": true,
     "strictNullChecks": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "noEmit": true
   },
   "include": [
-    "../src/**/*",
-    "../index.js",
-    "./jsx-config.tsx",
-    "../babel.config.js",
-    "../*.js"
+    "src/**/*",
+    "*",
+    "build-config/**/*",
+    "test/**/*"
+  ],
+  "exclude": [
+    "node_modules"
   ]
 }

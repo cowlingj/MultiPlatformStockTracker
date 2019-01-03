@@ -21,9 +21,8 @@ module.exports = [
     },
     module: {
       rules: [
-        config.rules.typescript,
-        config.rules.javascript,
-        config.rules.tiff,
+        config.rules.babel,
+        config.rules.ttf,
       ],
     },
     mode: "development",
@@ -50,9 +49,8 @@ module.exports = [
     },
     module: {
       rules: [
-        config.rules.typescript,
-        config.rules.javascript,
-        config.rules.tiff,
+        config.rules.babel,
+        config.rules.ttf,
       ],
     },
     mode: "development",

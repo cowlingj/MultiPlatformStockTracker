@@ -52,6 +52,3 @@ dist/
 
 # git
 .gitkeep
-
-# templates
-*.ejs

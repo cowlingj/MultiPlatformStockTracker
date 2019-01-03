@@ -15,7 +15,7 @@ module.exports = {
     filename: "[name]-bundle.js",
   },
   module: {
-    rules: [config.rules.typescript, config.rules.javascript, config.rules.ttf],
+    rules: [config.rules.babel, config.rules.ttf],
   },
   resolve: {
     extensions: config.extensionsFor([".web", ""]),
@@ -30,7 +30,7 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({
       filename: "index.html",
-      template: path.join(__dirname, "..", "src", "index.ejs"),
+      template: path.join(__dirname, "..", "src", "index.html"),
     }),
   ],
 }

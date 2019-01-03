@@ -1,6 +1,8 @@
 {
   "all": {
-    "presets": [],
+    "presets": [
+      ["@babel/preset-typescript", {"isTSX": true, "allExtensions": true}]
+    ],
     "plugins": [
       [
         "module-resolver",
