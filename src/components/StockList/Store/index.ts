@@ -40,7 +40,10 @@ export function quantChanged(
   return new Store(new QuantMapper(model))
 }
 
-export function itemAdded(model: DataModel, isHighlightedDefault: boolean): Store<AddItem, StockListState> {
+export function itemAdded(
+  model: DataModel,
+  isHighlightedDefault: boolean
+): Store<AddItem, StockListState> {
   return new Store(new ItemAddedMapper(model, isHighlightedDefault))
 }
 

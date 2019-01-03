@@ -11,7 +11,7 @@ import {
   initView,
   itemHighLighted,
 } from "./components/StockList/Store"
-import { Platform } from "react-native";
+import { Platform } from "react-native"
 
 const model: DataModel = { state: { items: [] } }
 

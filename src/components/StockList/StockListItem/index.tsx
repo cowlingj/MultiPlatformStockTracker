@@ -44,9 +44,12 @@ export default (props: Props): React.ReactElement<Props> => {
           <Text style={{ textAlign: "left", flex: 3 }}>{props.name}</Text>
           <Text style={{ textAlign: "right", flex: 1 }}>{props.quantity}</Text>
         </View>
-        {(()=>{
-          if (!props.isHighlighted) { return null } else {
-              return (<View
+        {(() => {
+          if (!props.isHighlighted) {
+            return null
+          } else {
+            return (
+              <View
                 style={{
                   display: "flex",
                   flexDirection: "row",

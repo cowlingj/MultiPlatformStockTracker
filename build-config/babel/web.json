@@ -2,7 +2,11 @@
   "all": {
     "presets": [],
     "plugins": [
-      ["module-resolver", { "alias": { "^react-native$": "react-native-web" } }]
+      [
+        "module-resolver",
+        { "alias": { "^react-native$": "react-native-web" } }
+      ],
+      "@babel/plugin-proposal-class-properties"
     ]
   },
   "dev": {

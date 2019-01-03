@@ -1,7 +1,7 @@
 {
   "all": {
     "presets": [],
-    "plugins": []
+    "plugins": ["@babel/plugin-proposal-class-properties"]
   },
   "dev": {
     "presets": [

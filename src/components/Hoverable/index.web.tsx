@@ -13,7 +13,6 @@ export default class extends React.Component<Props, {}> {
 
   public componentDidMount() {
     if (this.ref.current !== null) {
-
       const node: HTMLElement = ReactNativeWeb.findNodeHandle(this.ref.current)
       node.addEventListener("mouseenter", this.props.onMouseEnter)
       node.addEventListener("mouseleave", this.props.onMouseLeave)
@@ -22,7 +21,6 @@ export default class extends React.Component<Props, {}> {
 
   public componentWillUnmount() {
     if (this.ref.current !== null) {
-
       const node: HTMLElement = ReactNativeWeb.findNodeHandle(this.ref.current)
       node.removeEventListener("mouseenter", this.props.onMouseEnter)
       node.removeEventListener("mouseleave", this.props.onMouseLeave)
@@ -30,10 +28,6 @@ export default class extends React.Component<Props, {}> {
   }
 
   public render() {
-    return (
-      <View ref={this.ref}>
-        {this.props.children}
-      </View>
-    )
+    return <View ref={this.ref}>{this.props.children}</View>
   }
 }
