@@ -39,8 +39,13 @@ export default class StockList extends React.Component<Props, StockListState> {
     const setState = this.setState.bind(this)
     const initialState = (state: StockListState) => (this.state = state)
 
+    // TODO: remove in favor of an adder component with no dependencies
+    // pass in something like a Subscriber<{add: Observer<AddItem>}> instead
+    // that way only the intended view can create a dispatcher
+    // TODO: generify Dispatcher<{because: i, can: type, it: like, ...this}>
+    // that way a view can take only a dispatcher, subscriber and child views
     this.adderDispatcherFactory.subcribeAdd(props.add.apply(setState))
-
+ 
     props.dispatcherFactory.subscribeInc(props.inc.apply(setState))
     props.dispatcherFactory.subscribeDec(props.dec.apply(setState))
     props.dispatcherFactory.subscribeDel(props.del.apply(setState))
@@ -64,6 +69,7 @@ export default class StockList extends React.Component<Props, StockListState> {
         renderItem={({ item }) => {
           if (item === "adder") {
             return (
+              // replace with empty (pre-configured) adder
               <Adder
                 {...{
                   dispatcherFactory: this.adderDispatcherFactory,

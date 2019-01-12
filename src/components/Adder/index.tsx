@@ -1,12 +1,13 @@
 /** @format */
 
-import { View, Button, TextInput } from "react-native"
+import { Button, TextInput } from "react-native"
 import React from "react"
 import Dispatcher from "./Dispatcher"
 import DispatcherFactory from "./Dispatcher/DispatcherFactory"
 import { AddState } from "./Store"
 import { AddItem, Update, Init } from "./Messages"
 import { Store } from "../../archetecture/Store"
+import Container from "../base/Container";
 
 export interface Props {
   dispatcherFactory: DispatcherFactory
@@ -33,18 +34,7 @@ export default class extends React.Component<Props, AddState> {
 
   public render() {
     return (
-      <View
-        style={{
-          backgroundColor: "ghostwhite",
-          borderRadius: 5,
-          borderColor: "grey",
-          borderWidth: 1,
-          padding: 20,
-          shadowOffset: { width: 0, height: 1 },
-          shadowRadius: 1,
-          elevation: 1
-        }}
-      >
+      <Container style={{padding: 20, zIndex: 1}}>
         <TextInput
           autoCapitalize='sentences'
           autoCorrect={true}
@@ -56,7 +46,7 @@ export default class extends React.Component<Props, AddState> {
             borderColor: "grey",
             borderWidth: 1,
             borderRadius: 5,
-            padding: ".5em",
+            padding: 1,
             marginBottom: "1%"
           }}
           placeholder="item name"
@@ -66,7 +56,7 @@ export default class extends React.Component<Props, AddState> {
           onPress={() => this.dispatcher.add(this.state.name)}
           title='ADD'
         />
-      </View>
+      </Container>
     )
   }
 }

@@ -1,4 +1,0 @@
-{
-  "extends": "./tsconfig.common.json",
-  "exclude": ["**/*.web.*", "**/*.desktop.*"]
-}

@@ -1,7 +1,7 @@
 {
   "extends": "../tsconfig.json",
   "compilerOptions": {
-    "allowJsx": false,
-    "lib": []
-  }
+    "allowJs": false,
+    "lib": ["dom", "es2015"]
+  },
 }
