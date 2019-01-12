@@ -4,6 +4,7 @@ import { View, Text } from "react-native"
 import * as React from "react"
 import Icon from "react-native-vector-icons/FontAwesome"
 import Hoverable from "../../Hoverable"
+import Container from "../../base/Container";
 
 export interface Props {
   id: number
@@ -23,16 +24,11 @@ export default (props: Props): React.ReactElement<Props> => {
     <Hoverable
       onMouseEnter={() => props.highlight(props.id)}
       onMouseLeave={() => props.unHighlight(props.id)}>
-      <View
+      <Container
         style={{
-          backgroundColor: "ghostwhite",
-          borderRadius: 5,
-          borderColor: "grey",
           borderWidth: 1,
           padding: 20,
-          shadowOffset: { width: 0, height: 1 },
-          shadowRadius: 1,
-          elevation: 1
+          zIndex: 0
         }}>
         <View
           style={{
@@ -85,7 +81,7 @@ export default (props: Props): React.ReactElement<Props> => {
             )
           }
         })()}
-      </View>
+      </Container>
     </Hoverable>
   )
 }

@@ -1,6 +1,6 @@
 /** @format */
 
-module.exports = {
+export default {
   getTransformModulePath() {
     return require.resolve("react-native-typescript-transformer")
   },

@@ -1,10 +1,10 @@
 /** @format */
 
-const HtmlWebpackPlugin = require("html-webpack-plugin")
-const CleanWebpackPlugin = require("clean-webpack-plugin")
-const path = require("path")
-const webpack = require("webpack")
-const config = require("./webpack-shared")
+import HtmlWebpackPlugin from "html-webpack-plugin"
+import CleanWebpackPlugin from "clean-webpack-plugin"
+import path from "path"
+import webpack from "webpack"
+import * as config from "./webpack-shared"
 
 module.exports = [
   {
@@ -20,10 +20,7 @@ module.exports = [
       __filename: false,
     },
     module: {
-      rules: [
-        config.rules.babel,
-        config.rules.ttf,
-      ],
+      rules: config.rules,
     },
     mode: "development",
     target: "electron-main",
@@ -48,10 +45,7 @@ module.exports = [
       __filename: false,
     },
     module: {
-      rules: [
-        config.rules.babel,
-        config.rules.ttf,
-      ],
+      rules: config.rules,
     },
     mode: "development",
     target: "electron-renderer",
