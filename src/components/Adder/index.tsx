@@ -3,10 +3,10 @@
 import { Button, TextInput } from "react-native"
 import React from "react"
 import Dispatcher from "./Dispatcher"
-import { AddState } from "./Store"
+import { AddState } from "./Model"
 import { AddItem, Update, Init } from "./Messages"
 import { Store } from "../../archetecture/Store"
-import Container from "../base/Container";
+import Container from "../base/Container"
 
 export interface Props {
   dispatcher: Dispatcher
