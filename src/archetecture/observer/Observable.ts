@@ -1,8 +1,9 @@
 /** @format */
 
 import Observer from "./Observer"
+import Subscribable from "./Subscribable";
 
-export default class Observable<M> {
+export default class Observable<M> implements Subscribable<M> {
   private observers: Array<Observer<M> | null>
 
   constructor() {

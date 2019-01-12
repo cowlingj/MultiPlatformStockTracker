@@ -5,7 +5,7 @@ import StockList from "./routing/pages/StockList";
 import { View } from "react-native";
 
 export default () => (
-  <View style={{ height: "100%", width: "100%" }}>
+  <View style={{ flex: 1 }}>
     <Router>
       <Route
         exact

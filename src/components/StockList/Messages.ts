@@ -19,7 +19,7 @@ export interface AddItem {
   quantity: number
 }
 
-export interface HighLight {
+export interface Highlight {
   id: number
   isHighlighted: boolean
 }

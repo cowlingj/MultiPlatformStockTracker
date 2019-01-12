@@ -1,9 +1,9 @@
 /** @format */
 
-import { Mapper } from "../../../../archetecture/Store"
-import { AddItem } from "../../Messages"
-import { DataModel, DataItem, itemsToDisplay } from ".."
-import { StockListState } from "../../Model"
+import { Mapper } from "../../../archetecture/Store"
+import { AddItem } from "../Messages"
+import { StockListState, DataModel, DataItem, itemsToDisplay } from "../Model"
+
 export default class implements Mapper<AddItem, StockListState> {
   private model: DataModel
   private isHighlightedDefault: boolean

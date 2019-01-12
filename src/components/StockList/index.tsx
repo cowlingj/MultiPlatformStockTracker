@@ -3,8 +3,6 @@
 import * as React from "react"
 import { FlatList } from "react-native"
 import Dispatcher from "./Dispatcher"
-import DispatcherFactory from "./Dispatcher/DispatcherFactory"
-import Adder from "../Adder"
 import { Store } from "../../archetecture/Store"
 import {
   Increment,
@@ -12,46 +10,37 @@ import {
   RemoveItem,
   Init,
   AddItem,
-  HighLight,
+  Highlight,
 } from "./Messages"
 import { StockListState, StockListItem as ModelItem } from "./Model"
-import * as AdderStores from "../Adder/Store"
-import AdderDispatcherFactory from "../Adder/Dispatcher/DispatcherFactory"
 import StockListItem from "./StockListItem"
 
 export interface Props {
-  dispatcherFactory: DispatcherFactory
+  dispatcher: Dispatcher
   inc: Store<Increment, StockListState>
   dec: Store<Decrement, StockListState>
   del: Store<RemoveItem, StockListState>
   init: Store<Init, StockListState>
   add: Store<AddItem, StockListState>
-  highlight: Store<HighLight, StockListState>
+  highlight: Store<Highlight, StockListState>
+  Adder: React.ComponentType
 }
 
 export default class StockList extends React.Component<Props, StockListState> {
-  private dispatcher: Dispatcher
-  private adderDispatcherFactory = new AdderDispatcherFactory()
-
   constructor(props: Props) {
     super(props)
 
     const setState = this.setState.bind(this)
     const initialState = (state: StockListState) => (this.state = state)
+    
+    props.add.apply(setState)
+    props.inc.apply(setState)
+    props.dec.apply(setState)
+    props.del.apply(setState)
+    props.highlight.apply(setState)
+    props.init.apply(initialState)
 
-    // TODO: remove in favor of an adder component with no dependencies
-    // pass in something like a Subscriber<{add: Observer<AddItem>}> instead
-    // that way only the intended view can create a dispatcher
-    // TODO: generify Dispatcher<{because: i, can: type, it: like, ...this}>
-    // that way a view can take only a dispatcher, subscriber and child views
-    this.adderDispatcherFactory.subcribeAdd(props.add.apply(setState))
- 
-    props.dispatcherFactory.subscribeInc(props.inc.apply(setState))
-    props.dispatcherFactory.subscribeDec(props.dec.apply(setState))
-    props.dispatcherFactory.subscribeDel(props.del.apply(setState))
-    props.dispatcherFactory.subscribeHighlight(props.highlight.apply(setState))
-    props.dispatcherFactory.subscribeInit(props.init.apply(initialState))
-    this.dispatcher = props.dispatcherFactory.create()
+    props.dispatcher.init()
   }
 
   public render() {
@@ -68,17 +57,7 @@ export default class StockList extends React.Component<Props, StockListState> {
         }}
         renderItem={({ item }) => {
           if (item === "adder") {
-            return (
-              // replace with empty (pre-configured) adder
-              <Adder
-                {...{
-                  dispatcherFactory: this.adderDispatcherFactory,
-                  add: AdderStores.itemAdded(),
-                  update: AdderStores.update(),
-                  init: AdderStores.initView(),
-                }}
-              />
-            )
+            return (<this.props.Adder />)
           } else {
             return (
               <StockListItem
@@ -86,14 +65,14 @@ export default class StockList extends React.Component<Props, StockListState> {
                 id={item.id}
                 name={item.name}
                 quantity={item.quantity}
-                inc={this.dispatcher.inc.bind(this.dispatcher)}
-                dec={this.dispatcher.dec.bind(this.dispatcher)}
-                del={this.dispatcher.del.bind(this.dispatcher)}
-                highlight={this.dispatcher.makeHighlighted.bind(
-                  this.dispatcher
+                inc={this.props.dispatcher.inc.bind(this.props.dispatcher)}
+                dec={this.props.dispatcher.dec.bind(this.props.dispatcher)}
+                del={this.props.dispatcher.del.bind(this.props.dispatcher)}
+                highlight={this.props.dispatcher.makeHighlighted.bind(
+                  this.props.dispatcher
                 )}
-                unHighlight={this.dispatcher.makeUnhighlighted.bind(
-                  this.dispatcher
+                unHighlight={this.props.dispatcher.makeUnhighlighted.bind(
+                  this.props.dispatcher
                 )}
                 view={() => {}}
                 isHighlighted={item.isHighlited}

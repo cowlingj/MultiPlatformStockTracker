@@ -6,5 +6,5 @@ export default function Router(props: {
   children?: (JSX.Element | ComponentClass<any>) |
              (JSX.Element | ComponentClass<any>)[]
 }): JSX.Element {
-  return <BrowserRouter><View style={{flex: 1, height: "100%"}}>{props.children}</View></BrowserRouter>
+  return <BrowserRouter><View style={{flex: 1 }}>{props.children}</View></BrowserRouter>
 } 

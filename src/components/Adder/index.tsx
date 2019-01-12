@@ -3,21 +3,19 @@
 import { Button, TextInput } from "react-native"
 import React from "react"
 import Dispatcher from "./Dispatcher"
-import DispatcherFactory from "./Dispatcher/DispatcherFactory"
 import { AddState } from "./Store"
 import { AddItem, Update, Init } from "./Messages"
 import { Store } from "../../archetecture/Store"
 import Container from "../base/Container";
 
 export interface Props {
-  dispatcherFactory: DispatcherFactory
+  dispatcher: Dispatcher
   add: Store<AddItem, AddState>
   update: Store<Update, AddState>
   init: Store<Init, AddState>
 }
 
 export default class extends React.Component<Props, AddState> {
-  private dispatcher: Dispatcher
 
   constructor(props: Props) {
     super(props)
@@ -25,11 +23,11 @@ export default class extends React.Component<Props, AddState> {
     const setState = this.setState.bind(this)
     const initialState = (state: AddState) => (this.state = state)
 
-    props.dispatcherFactory.subcribeAdd(props.add.apply(setState))
-    props.dispatcherFactory.subscribeUpdate(props.update.apply(setState))
-    props.dispatcherFactory.subscribeInit(props.init.apply(initialState))
+    props.add.apply(setState)
+    props.update.apply(setState)
+    props.init.apply(initialState)
 
-    this.dispatcher = props.dispatcherFactory.create()
+    props.dispatcher.init()
   }
 
   public render() {
@@ -38,8 +36,8 @@ export default class extends React.Component<Props, AddState> {
         <TextInput
           autoCapitalize='sentences'
           autoCorrect={true}
-          onSubmitEditing={() => this.dispatcher.add(this.state.name)}
-          onChangeText={newText => this.dispatcher.update(newText)}
+          onSubmitEditing={() => this.props.dispatcher.add(this.state.name)}
+          onChangeText={newText => this.props.dispatcher.update(newText)}
           value={this.state.name}
           style={{
             backgroundColor: "whitesmoke",
@@ -53,7 +51,7 @@ export default class extends React.Component<Props, AddState> {
           placeholderTextColor="grey"
         />
         <Button
-          onPress={() => this.dispatcher.add(this.state.name)}
+          onPress={() => this.props.dispatcher.add(this.state.name)}
           title='ADD'
         />
       </Container>

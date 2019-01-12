@@ -6,6 +6,7 @@ import Observable from "../../../archetecture/observer/Observable"
 export default class Dispatcher {
   private addMessenger: Observable<AddItem>
   private updateMessenger: Observable<Update>
+  private initMessenger: Observable<Init>;
 
   constructor(
     addMessenger: Observable<AddItem>,
@@ -14,12 +15,12 @@ export default class Dispatcher {
   ) {
     this.addMessenger = addMessenger
     this.updateMessenger = updateMessenger
-
-    initMessenger.notify({})
+    this.initMessenger = initMessenger
   }
 
   public add(name: string, quantity: number = 1) {
     if (name === "") {
+      // TODO: invalidItemMessenger.notify({ reason: string })
       return
     }
     this.addMessenger.notify({ name, quantity })
@@ -27,5 +28,9 @@ export default class Dispatcher {
 
   public update(name: string) {
     this.updateMessenger.notify({ name })
+  }
+
+  public init() {
+    this.initMessenger.notify({})
   }
 }

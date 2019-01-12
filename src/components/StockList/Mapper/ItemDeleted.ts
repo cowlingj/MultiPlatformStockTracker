@@ -1,11 +1,10 @@
 /** @format */
 
-import { Mapper } from "../../../../archetecture/Store"
-import { RemoveItem } from "../../Messages"
-import { DataModel, itemsToDisplay } from ".."
-import { StockListState } from "../../Model"
-import IllegalOperationError from "../../../../util/error/IllegalOperationError"
-import IllegalStateError from "../../../../util/error/IllegalStateError"
+import { Mapper } from "../../../archetecture/Store"
+import { RemoveItem } from "../Messages"
+import { StockListState, DataModel, itemsToDisplay } from "../Model"
+import IllegalOperationError from "../../../util/error/IllegalOperationError"
+import IllegalStateError from "../../../util/error/IllegalStateError"
 export default class implements Mapper<RemoveItem, StockListState> {
   private model: DataModel
   constructor(model: DataModel) {
