@@ -1,7 +1,7 @@
 /** @format */
 
 import * as React from "react"
-import { FlatList, ActivityIndicator, View } from "react-native"
+import { FlatList, ActivityIndicator, View, Text } from "react-native"
 import Dispatcher from "./dispatcher"
 import { StockListState, StockListItem as ModelItem } from "./model"
 import StockListItem from "./StockListItem"
@@ -31,6 +31,7 @@ export default class StockList extends React.Component<Props, StockListState> {
     return (
       <FlatList
         ItemSeparatorComponent={() => (<View style={{borderBottomWidth: 1, borderBottomColor: "black"}}></View>)}
+        ListEmptyComponent={() => (<Text>no items to display</Text>)}
         style={{ flex: 1 }}
         data={([] as ModelItem[]).concat(this.state.items)}
         keyExtractor={ item => item.id.toString() }
