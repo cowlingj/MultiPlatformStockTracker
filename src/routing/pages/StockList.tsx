@@ -1,67 +1,29 @@
 import StockList from '../../components/StockList'
 import * as React from "react"
-import {
-  DataModel,
-  itemsToDisplay,
-} from "../../components/StockList/Model"
-import { Platform } from "react-native"
-import { Store } from '../../archetecture/Store';
 import Observable from '../../archetecture/observer/Observable';
-import { Init, Increment, Decrement, AddItem, RemoveItem, Highlight } from '../../components/StockList/Messages';
-import { StockListState } from '../../components/StockList/Model';
-import QuantityChanged from '../../components/StockList/Mapper/QuantityChanged';
-import ItemAdded from '../../components/StockList/Mapper/ItemAdded';
-import ItemDeleted from '../../components/StockList/Mapper/ItemDeleted';
-import ItemHighLighted from '../../components/StockList/Mapper/ItemHighLighted';
-import Dispatcher from '../../components/StockList/Dispatcher';
-import Adder from '../../components/Adder';
-import AdderDispatcher from '../../components/Adder/Dispatcher'
-import { AddState } from '../../components/Adder/Model';
-import { Update, Init as AdderInit } from '../../components/Adder/Messages';
+import Dispatcher from '../../components/StockList/dispatcher';
+import Adder from '../../components/AdderButton';
+import AdderDispatcher from '../../components/AdderButton/dispatcher'
+import HistoryService from '../../services/HistoryService';
+import { RouteComponentProps, withRouter } from 'react-router';
+import { StockListStateService, DataModel } from '../../services/StockListStateService';
+import { View } from 'react-native';
 
-const model: DataModel = { state: { items: [] } }
+const StockListRenderer = (props: RouteComponentProps & {stockListStateService: StockListStateService}) => {
+  const stateUpdater = new Observable<DataModel>()
 
-const inc = new Observable<Increment>()
-const dec = new Observable<Decrement>()
-const add = new Observable<AddItem>()
-const del = new Observable<RemoveItem>()
-const highlight = new Observable<Highlight>()
-const init = new Observable<Init>()
-
-const adderUpdate = new Observable<Update>()
-const adderInit = new Observable<AdderInit>()
-
-export default () => (<StockList
+  return (<View style={{ flex: 1, justifyContent: "center", alignItems: "stretch" }}><StockList
   {...{
-    inc: new Store<Increment, StockListState>(new QuantityChanged(model), inc),
-    dec: new Store<Decrement, StockListState>(new QuantityChanged(model), dec),
-    add: new Store<AddItem, StockListState>(
-      new ItemAdded(model, Platform.OS === "android" || Platform.OS === "ios"),
-      add
-    ),
-    del: new Store<RemoveItem, StockListState>(new ItemDeleted(model), del),
-    highlight: new Store<Highlight, StockListState>(
-      new ItemHighLighted(model),
-      highlight
-    ),
-    init: new Store<Init, StockListState>(
-      { map: () => itemsToDisplay(model.state) },
-      init
-    ),
-    dispatcher: new Dispatcher(inc, dec, del, highlight, init),
-    Adder: () => (<Adder {...{
-      add: new Store<AddItem, AddState>(
-        { map() { return { name: "" } } },
-        add
-      ),
-      update: new Store<Update, AddState>(
-        { map(message: Update) { return { name: message.name } } },
-        adderUpdate
-      ),
-      init: new Store<Init, AddState>(
-        { map() { return { name: "" } } }, 
-        adderInit
-      ),
-      dispatcher: new AdderDispatcher(add, adderUpdate, adderInit)
-    }} />)
-  }} />)
+    stateUpdater,
+    dispatcher: new Dispatcher(props.stockListStateService, stateUpdater),
+  }} />
+  <View style={{
+    padding: "2%",
+    alignSelf: "flex-end"
+  }}>
+    <Adder dispatcher={new AdderDispatcher(new HistoryService(props.history))}/>
+  </View>
+  </View>)
+}
+
+export default withRouter(StockListRenderer)

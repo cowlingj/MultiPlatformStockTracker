@@ -1,60 +1,41 @@
-/** @format */
+import { View, TextInput, Button, ActivityIndicator } from "react-native";
+import Dispatcher from "./dispatcher";
+import React from "react";
+import Subscribable from "../../archetecture/observer/Subscribable";
 
-import { Button, TextInput } from "react-native"
-import React from "react"
-import Dispatcher from "./Dispatcher"
-import { AddState } from "./Model"
-import { AddItem, Update, Init } from "./Messages"
-import { Store } from "../../archetecture/Store"
-import Container from "../base/Container"
-
-export interface Props {
+interface Props {
   dispatcher: Dispatcher
-  add: Store<AddItem, AddState>
-  update: Store<Update, AddState>
-  init: Store<Init, AddState>
+  stateUpdater: Subscribable<State>
 }
 
-export default class extends React.Component<Props, AddState> {
+export interface State {
+  name: string, 
+  quantity: number | null
+}
 
+export default class extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props)
 
-    const setState = this.setState.bind(this)
-    const initialState = (state: AddState) => (this.state = state)
-
-    props.add.apply(setState)
-    props.update.apply(setState)
-    props.init.apply(initialState)
-
+    props.stateUpdater.subscribe({ onMessage: this.setState.bind(this) })
     props.dispatcher.init()
   }
 
-  public render() {
+  render() {
+    if (!this.state) {
+      return <ActivityIndicator/>
+    }
     return (
-      <Container style={{padding: 20, zIndex: 1}}>
+      <View>
         <TextInput
-          autoCapitalize='sentences'
-          autoCorrect={true}
-          onSubmitEditing={() => this.props.dispatcher.add(this.state.name)}
-          onChangeText={newText => this.props.dispatcher.update(newText)}
-          value={this.state.name}
-          style={{
-            backgroundColor: "whitesmoke",
-            borderColor: "grey",
-            borderWidth: 1,
-            borderRadius: 5,
-            padding: 1,
-            marginBottom: "1%"
-          }}
-          placeholder="item name"
-          placeholderTextColor="grey"
-        />
-        <Button
-          onPress={() => this.props.dispatcher.add(this.state.name)}
-          title='ADD'
-        />
-      </Container>
+          onChangeText={(text)=>this.props.dispatcher.nameChange(text)}
+          value={this.state.name}></TextInput>
+        <TextInput
+          keyboardType="numeric"
+          onChangeText={(text)=>this.props.dispatcher.quantChange(text)}
+          value={`${this.state.quantity}`}></TextInput>
+        <Button onPress={() => this.props.dispatcher.addItem(this.state.name, this.state.quantity)} title="Confirm"></Button>
+      </View>
     )
   }
 }

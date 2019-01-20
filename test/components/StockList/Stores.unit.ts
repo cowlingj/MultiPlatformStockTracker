@@ -2,7 +2,7 @@
 
 import * as Store from "../../../src/components/StockList/Store"
 import sinon from "sinon"
-import { StockListState } from "../../../src/components/StockList/Model"
+import { StockListState } from "../../../src/components/StockList/model"
 import chai from "chai"
 import IllegalOperationError from "../../../src/util/error/IllegalOperationError"
 import IllegalStateError from "../../../src/util/error/IllegalStateError"

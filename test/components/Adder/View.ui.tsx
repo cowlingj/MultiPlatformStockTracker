@@ -6,7 +6,7 @@ import DispatcherFactory from "../../../src/components/Adder/Dispatcher/Dispatch
 import { shallow } from "enzyme"
 import { Store } from "../../../src/archetecture/Store"
 import Sinon from "sinon"
-import Dispatcher from "../../../src/components/Adder/Dispatcher"
+import Dispatcher from "../../../src/components/Adder/dispatcher"
 import { AddState } from "../../../src/components/Adder/Store"
 
 describe("adder", () => {
@@ -23,7 +23,7 @@ describe("adder", () => {
               }
             ),
           }),
-          add: Sinon.createStubInstance(Store),
+          initAddScreen: Sinon.createStubInstance(Store),
           update: Sinon.createStubInstance(Store),
           init: Sinon.createStubInstance(Store, {
             apply: Sinon.stub().callsFake((f: (state: AddState) => void) => {

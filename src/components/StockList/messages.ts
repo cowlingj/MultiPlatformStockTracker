@@ -14,14 +14,7 @@ export interface RemoveItem {
   id: number
 }
 
-export interface AddItem {
-  name: string
-  quantity: number
-}
-
 export interface Highlight {
   id: number
   isHighlighted: boolean
 }
-
-export interface Init {}

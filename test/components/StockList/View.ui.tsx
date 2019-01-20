@@ -4,10 +4,10 @@ import StockList from "../../../src/components/StockList"
 import Sinon from "sinon"
 import React from "react"
 import { shallow } from "enzyme"
-import { StockListState } from "../../../src/components/StockList/Model"
+import { StockListState } from "../../../src/components/StockList/model"
 import { Store } from "../../../src/archetecture/Store"
 import DispatcherFactory from "../../../src/components/StockList/Dispatcher/DispatcherFactory"
-import Dispatcher from "../../../src/components/StockList/Dispatcher"
+import Dispatcher from "../../../src/components/StockList/dispatcher"
 
 describe("StockList", () => {
   it("should render", () => {
