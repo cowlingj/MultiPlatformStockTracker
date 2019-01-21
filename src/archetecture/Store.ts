@@ -1,11 +1,11 @@
 /** @format */
 
-import Subscribable from "./observer/Subscribable";
+import Subscribable from "./observer/Subscribable"
 
 export class Store<M, S> {
   private mapper: Mapper<M, S>
   private subscribable: Subscribable<M>
-  
+
   constructor(mapper: Mapper<M, S>, subscribable: Subscribable<M>) {
     this.mapper = mapper
     this.subscribable = subscribable

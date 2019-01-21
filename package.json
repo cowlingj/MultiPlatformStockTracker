@@ -21,7 +21,7 @@
     "sit-test": "ENV='dev' PLATFORM='web' node --inspect node_modules/.bin/jest -i --config ./test/test-config/jest.sit.config.json --no-cache --env='jsdom'",
     "test": "ENV='dev' PLATFORM='web' node --inspect node_modules/.bin/jest -i --config ./test/test-config/jest.all.config.json --no-cache --env='jsdom'",
     "pretty": "prettier --write --config 'prettierrc.json' --ignore-path '.prettierignore' '*' '{src,test,build-config}/**/*'",
-    "lint": "tslint --project './build-config/tsconfig.json' --config './.tslint.json' '*.{js,ts,jsx,tsx}' '{src,test,build-config}/**/*.{js,ts,jsx,tsx}'"
+    "lint": "tslint --project './tsconfig.json' --config './.tslint.json' '*.{js,ts,jsx,tsx}' '{src,test,build-config}/**/*.{js,ts,jsx,tsx}'"
   },
   "dependencies": {
     "electron": "^3.0.5",

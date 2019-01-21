@@ -20,13 +20,6 @@
     "noFallthroughCasesInSwitch": true,
     "noEmit": true
   },
-  "include": [
-    "src/**/*",
-    "*",
-    "build-config/**/*",
-    "test/**/*"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+  "include": ["src/**/*", "*", "build-config/**/*", "test/**/*"],
+  "exclude": ["node_modules"]
 }

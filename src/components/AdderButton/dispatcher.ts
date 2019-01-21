@@ -1,13 +1,11 @@
 /** @format */
 
-import HistoryService from "../../services/HistoryService";
+import HistoryService from "../../services/HistoryService"
 
 export default class Dispatcher {
-  private history: HistoryService;
+  private history: HistoryService
 
-  constructor(
-    history: HistoryService
-  ) {
+  constructor(history: HistoryService) {
     this.history = history
   }
 

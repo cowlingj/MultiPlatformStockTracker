@@ -2,10 +2,7 @@
   "all": {
     "presets": [],
     "plugins": [
-      [
-        "module-resolver",
-        { "alias": { "^react-router$": "react-router-dom" } }
-      ]
+      ["module-resolver", { "alias": { "^react-router$": "react-router-dom" } }]
     ]
   },
   "dev": {

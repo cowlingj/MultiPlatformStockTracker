@@ -1,15 +1,19 @@
-import React from "react"
-import { Omit } from "./types/Omit";
+/** @format */
 
-export default function PropsInjector<T, NotT extends T>(Wrapped: React.ComponentType<NotT>, t: T):
-  React.ComponentClass<Omit<NotT, keyof T>> {
+import React from "react"
+import { Omit } from "./types/Omit"
+
+export default function PropsInjector<T, NotT extends T>(
+  Wrapped: React.ComponentType<NotT>,
+  t: T
+): React.ComponentClass<Omit<NotT, keyof T>> {
   return class extends React.Component<Omit<NotT, keyof T>> {
     constructor(props: Omit<NotT, keyof T>) {
       super(props)
     }
-    render() {
+    public render() {
       const props = Object.assign({}, this.props, t) as NotT
-      return (<Wrapped {...props} />)
+      return <Wrapped {...props} />
     }
   }
 }

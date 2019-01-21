@@ -1,4 +1,6 @@
-import { StyleSheet } from 'react-native'
+/** @format */
+
+import { StyleSheet } from "react-native"
 
 export default StyleSheet.create({
   container: {
@@ -9,5 +11,5 @@ export default StyleSheet.create({
     shadowOffset: { width: 0, height: 4 },
     shadowRadius: 4,
     elevation: 12,
-  }
+  },
 })

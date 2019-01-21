@@ -1,15 +1,17 @@
 {
   "all": {
     "presets": [
-      ["@babel/preset-typescript", {"isTSX": true, "allExtensions": true}]
+      ["@babel/preset-typescript", { "isTSX": true, "allExtensions": true }]
     ],
     "plugins": [
       [
         "module-resolver",
-        { "alias": {
-          "^react-native$": "react-native-web",
-          "^react-router$": "react-router-dom"
-          } }
+        {
+          "alias": {
+            "^react-native$": "react-native-web",
+            "^react-router$": "react-router-dom"
+          }
+        }
       ],
       "@babel/plugin-proposal-class-properties"
     ]

@@ -1,9 +1,11 @@
-import { State } from "../components/Adder";
-import { QuantityChange, NameChange } from "../components/Adder/messages";
+/** @format */
+
+import { State } from "../components/Adder"
+import { QuantityChange, NameChange } from "../components/Adder/messages"
 
 export class AdderStateService {
   private state: State
-  private initial: State;
+  private initial: State
 
   constructor(initial: State) {
     this.initial = initial
@@ -25,12 +27,12 @@ export class AdderStateService {
   }
 
   public async quantChanged(item: QuantityChange): Promise<State> {
-    this.state = Object.assign({}, this.state, {quantity: item.quantity})
+    this.state = Object.assign({}, this.state, { quantity: item.quantity })
     return this.state
   }
 
   public async nameChanged(item: NameChange): Promise<State> {
-    this.state = Object.assign({}, this.state, {name: item.name})
+    this.state = Object.assign({}, this.state, { name: item.name })
     return this.state
   }
 }

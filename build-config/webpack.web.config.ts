@@ -20,20 +20,20 @@ const plugins = [
   }),
 ]
 
-if (process.env.ENV == "dev") {
+if (process.env.ENV === "dev") {
   plugins.push(new webpack.HotModuleReplacementPlugin())
 }
 
 export default {
-  mode: 'development', // TODO: change so it looks at env
-  devtool: 'inline-source-map',
+  mode: "development", // TODO: change so it looks at env
+  devtool: "inline-source-map",
   entry: {
     app: path.join(__dirname, "..", "src", "entry", "index.web.ts"),
   },
   output: {
     path: path.join(__dirname, "..", "dist"),
     filename: "[name]-bundle.js",
-    publicPath: '/',
+    publicPath: "/",
   },
   module: {
     rules: config.rules,
@@ -43,14 +43,14 @@ export default {
   },
   plugins,
   devServer: {
-    contentBase: path.join(__dirname, 'dist'),
+    contentBase: path.join(__dirname, "dist"),
     compress: true,
     port: 9000,
     historyApiFallback: true,
     hot: true,
     https: true,
-    index: path.join(__dirname, 'dist', 'index.html'),
+    index: path.join(__dirname, "dist", "index.html"),
     open: true,
     publicPath: "/",
-  }
+  },
 }

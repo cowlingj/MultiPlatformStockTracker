@@ -1,23 +1,25 @@
-import Observable from "../../archetecture/observer/Observable";
-import HistoryService from "../../services/HistoryService";
-import { State } from ".";
-import { AdderStateService } from "../../services/AdderStateService";
-import { StockListStateService } from "../../services/StockListStateService";
+/** @format */
+
+import Observable from "../../archetecture/observer/Observable"
+import HistoryService from "../../services/HistoryService"
+import { State } from "."
+import { AdderStateService } from "../../services/AdderStateService"
+import { StockListStateService } from "../../services/StockListStateService"
 
 export default class Dispatcher {
-
-  private messenger: Observable<State>;
-  private history: HistoryService;
-  private adderStateServive: AdderStateService;
-  private stockListStateService: StockListStateService;
+  private messenger: Observable<State>
+  private history: HistoryService
+  private adderStateServive: AdderStateService
+  private stockListStateService: StockListStateService
 
   private static numberRegex = /^((\+|-)?\d)?\d*$/
 
-  constructor(messenger: Observable<State>,
-              adderState: AdderStateService,
-              stockListStateService: StockListStateService,
-              history: HistoryService) {
-
+  constructor(
+    messenger: Observable<State>,
+    adderState: AdderStateService,
+    stockListStateService: StockListStateService,
+    history: HistoryService
+  ) {
     this.messenger = messenger
     this.adderStateServive = adderState
     this.stockListStateService = stockListStateService
@@ -25,45 +27,59 @@ export default class Dispatcher {
   }
 
   public init() {
-    this.adderStateServive.get().then((data)=>{
-      this.messenger.notify(data)
-    }).catch()
-    
+    this.adderStateServive
+      .get()
+      .then(data => {
+        this.messenger.notify(data)
+      })
+      .catch()
   }
 
   public addItem(name: string, quantity: string) {
-    if (name === "" || quantity === "" || !Dispatcher.numberRegex.test(quantity)) {
+    if (
+      name === "" ||
+      quantity === "" ||
+      !Dispatcher.numberRegex.test(quantity)
+    ) {
       return
     }
- 
+
     this.history.goBackTo("/")
-    this.adderStateServive.itemAdded()
-    this.stockListStateService.addItem({name, quantity: parseInt(quantity)})
+    this.adderStateServive.itemAdded().catch()
+    this.stockListStateService
+      .addItem({ name, quantity: parseInt(quantity, 10) })
+      .catch()
   }
 
   public quantChange(qauntityString: string): void {
-
     if (!Dispatcher.numberRegex.test(qauntityString)) {
       return
     }
 
     if (qauntityString === "") {
-      this.adderStateServive.clearQuantity().then((data) => {
-        this.messenger.notify(data)
-      })
+      this.adderStateServive
+        .clearQuantity()
+        .then(data => {
+          this.messenger.notify(data)
+        })
+        .catch()
       return
     }
 
-    this.adderStateServive.quantChanged({quantity: parseInt(qauntityString)})
-    .then((data) => {
-      return this.messenger.notify(data)
-    })
+    this.adderStateServive
+      .quantChanged({ quantity: parseInt(qauntityString, 10) })
+      .then(data => {
+        return this.messenger.notify(data)
+      })
+      .catch()
   }
-  
+
   public nameChange(name: string): void {
-    this.adderStateServive.nameChanged({name})
-    .then((data) =>{
-      this.messenger.notify(data)
-    })
+    this.adderStateServive
+      .nameChanged({ name })
+      .then(data => {
+        this.messenger.notify(data)
+      })
+      .catch()
   }
 }

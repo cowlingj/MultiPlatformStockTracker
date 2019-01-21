@@ -1,7 +1,14 @@
-import { AddItem } from "../components/Adder/messages";
-import { RemoveItem, Highlight, Increment, Decrement } from "../components/StockList/messages";
-import IllegalStateError from "../util/error/IllegalStateError";
-import IllegalOperationError from "../util/error/IllegalOperationError";
+/** @format */
+
+import { AddItem } from "../components/Adder/messages"
+import {
+  RemoveItem,
+  Highlight,
+  Increment,
+  Decrement,
+} from "../components/StockList/messages"
+import IllegalStateError from "../util/error/IllegalStateError"
+import IllegalOperationError from "../util/error/IllegalOperationError"
 
 export interface DataModel {
   items: DataItem[]
@@ -17,31 +24,29 @@ export interface DataItem {
 }
 
 export class StockListStateService {
-  
-  private state: DataModel;
+  private state: DataModel
 
   constructor(initialState: DataModel) {
     this.state = initialState
   }
-  
-  public async addItem(itemToAdd: AddItem): Promise<DataModel> { 
-      const possibleIndex = this.state.items.findIndex(item => !item.inUse)
-      let removed: DataItem[] = []
-      if (possibleIndex !== -1) {
-        removed = this.state.items.splice(possibleIndex, 1)
-      }
-      this.state.items.unshift({
-        id: removed.length > 0 ? removed[0].id : this.state.items.length,
-        name: itemToAdd.name,
-        quantity: itemToAdd.quantity,
-        isHighlighted: this.state.isHighlightedDefault,
-        inUse: true,
-      })
-      return this.state
+
+  public async addItem(itemToAdd: AddItem): Promise<DataModel> {
+    const possibleIndex = this.state.items.findIndex(item => !item.inUse)
+    let removed: DataItem[] = []
+    if (possibleIndex !== -1) {
+      removed = this.state.items.splice(possibleIndex, 1)
+    }
+    this.state.items.unshift({
+      id: removed.length > 0 ? removed[0].id : this.state.items.length,
+      name: itemToAdd.name,
+      quantity: itemToAdd.quantity,
+      isHighlighted: this.state.isHighlightedDefault,
+      inUse: true,
+    })
+    return this.state
   }
 
   private checkAndSendErrors(singletonArray: DataItem[]) {
-
     if (singletonArray.length < 1) {
       throw new IllegalOperationError()
     }
@@ -77,7 +82,9 @@ export class StockListStateService {
     return this.state
   }
 
-  public async quantChange(itemToUpdate: Increment | Decrement): Promise<DataModel> {
+  public async quantChange(
+    itemToUpdate: Increment | Decrement
+  ): Promise<DataModel> {
     const singletonArrayToUpdate = this.state.items.filter(
       item => item.id === itemToUpdate.id
     )

@@ -4,7 +4,7 @@ import { View, Text } from "react-native"
 import * as React from "react"
 import Icon from "react-native-vector-icons/FontAwesome"
 import Hoverable from "../../Hoverable"
-import Container from "../../base/Container";
+import Container from "../../base/Container"
 
 export interface Props {
   id: number
@@ -28,7 +28,7 @@ export default (props: Props): React.ReactElement<Props> => {
         style={{
           borderWidth: 1,
           padding: 20,
-          zIndex: 0
+          zIndex: 0,
         }}>
         <View
           style={{

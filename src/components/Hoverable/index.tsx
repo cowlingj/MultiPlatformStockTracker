@@ -1,7 +1,6 @@
 /** @format */
 
 import * as React from "react"
-import { Component } from "react"
 import { View } from "react-native"
 
 export interface Props {
@@ -9,9 +8,7 @@ export interface Props {
   onMouseLeave: () => void
 }
 
-export default class extends Component<Props, {}> {
-  public componentDidMount() {}
-  public componentWillUnmount() {}
+export default class extends React.Component<Props, {}> {
   public render() {
     return <View>{this.props.children}</View>
   }

@@ -1,10 +1,17 @@
-import { NativeRouter } from "react-router-native";
-import { View } from "react-native";
-import React, { ComponentClass } from "react";
+/** @format */
+
+import { NativeRouter } from "react-router-native"
+import { View } from "react-native"
+import React, { ComponentClass } from "react"
 
 export default function Router(props: {
-  children?: (JSX.Element | ComponentClass<any>) |
-             (JSX.Element | ComponentClass<any>)[]
+  children?:
+    | (JSX.Element | ComponentClass<any>)
+    | Array<JSX.Element | ComponentClass<any>>
 }): JSX.Element {
-  return <NativeRouter><View style={{flex: 1}}>{props.children}</View></NativeRouter>
-} 
+  return (
+    <NativeRouter>
+      <View style={{ flex: 1 }}>{props.children}</View>
+    </NativeRouter>
+  )
+}

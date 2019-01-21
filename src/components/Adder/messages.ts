@@ -1,3 +1,5 @@
+/** @format */
+
 export interface AddItem {
   name: string
   quantity: number

@@ -1,4 +1,6 @@
-import Observer from "./Observer";
+/** @format */
+
+import Observer from "./Observer"
 
 export default interface Subscribable<M> {
   subscribe(observer: Observer<M>): number
