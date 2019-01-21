@@ -15,7 +15,7 @@ export class AdderStateService {
   }
 
   public async clearQuantity(): Promise<State> {
-    this.state = Object.assign({}, this.state, { quantity: null })
+    this.state = Object.assign({}, this.state, { quantity: "" })
     return this.state
   }
 

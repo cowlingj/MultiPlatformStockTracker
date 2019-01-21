@@ -1,16 +1,11 @@
 import { RouteComponentProps, withRouter } from "react-router";
-import Adder from "../../components/Adder";
+import Adder, { State } from "../../components/Adder";
 import Dispatcher from "../../components/Adder/dispatcher";
 import HistoryService from "../../services/HistoryService";
 import Observable from "../../archetecture/observer/Observable";
 import React from "react";
 import { AdderStateService } from "../../services/AdderStateService";
 import { StockListStateService } from "../../services/StockListStateService";
-
-interface State {
-  name: string
-  quantity: number
-}
 
 interface Props extends RouteComponentProps {
   adderStateService: AdderStateService

@@ -11,6 +11,8 @@ export default class Dispatcher {
   private adderStateServive: AdderStateService;
   private stockListStateService: StockListStateService;
 
+  private static numberRegex = /^((\+|-)?\d)?\d*$/
+
   constructor(messenger: Observable<State>,
               adderState: AdderStateService,
               stockListStateService: StockListStateService,
@@ -29,17 +31,22 @@ export default class Dispatcher {
     
   }
 
-  public addItem(name: string, quantity: number | null) {
-    if (name === "" || quantity === null) {
+  public addItem(name: string, quantity: string) {
+    if (name === "" || quantity === "" || !Dispatcher.numberRegex.test(quantity)) {
       return
     }
  
     this.history.goBackTo("/")
     this.adderStateServive.itemAdded()
-    this.stockListStateService.addItem({name, quantity})
+    this.stockListStateService.addItem({name, quantity: parseInt(quantity)})
   }
 
   public quantChange(qauntityString: string): void {
+
+    if (!Dispatcher.numberRegex.test(qauntityString)) {
+      return
+    }
+
     if (qauntityString === "") {
       this.adderStateServive.clearQuantity().then((data) => {
         this.messenger.notify(data)
@@ -47,18 +54,7 @@ export default class Dispatcher {
       return
     }
 
-    let parsedQuantity: number
-
-    try {
-      parsedQuantity = parseInt(qauntityString)
-    } catch {
-      this.adderStateServive.clearQuantity().then((data) => {
-        this.messenger.notify(data)
-      })
-      return
-    }
-
-    this.adderStateServive.quantChanged({quantity: parsedQuantity})
+    this.adderStateServive.quantChanged({quantity: parseInt(qauntityString)})
     .then((data) => {
       return this.messenger.notify(data)
     })

@@ -10,14 +10,19 @@ interface Props {
 
 export interface State {
   name: string, 
-  quantity: number | null
+  quantity: string,
 }
 
 export default class extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props)
 
-    props.stateUpdater.subscribe({ onMessage: this.setState.bind(this) })
+    let setState = this.setState.bind(this)
+    props.stateUpdater.subscribe({ onMessage(m) {
+        //if (m.quantity !== "") throw JSON.stringify(m)        
+        setState(m)
+      }
+    })
     props.dispatcher.init()
   }
 
@@ -33,7 +38,7 @@ export default class extends React.Component<Props, State> {
         <TextInput
           keyboardType="numeric"
           onChangeText={(text)=>this.props.dispatcher.quantChange(text)}
-          value={`${this.state.quantity}`}></TextInput>
+          value={`${this.state.quantity}`} />
         <Button onPress={() => this.props.dispatcher.addItem(this.state.name, this.state.quantity)} title="Confirm"></Button>
       </View>
     )

@@ -9,7 +9,7 @@ import { AdderStateService } from "./services/AdderStateService";
 import { Platform, View } from "react-native";
 
 const stockListStateService = new StockListStateService({items: [], isHighlightedDefault: Platform.OS == "android" || Platform.OS === "ios"})
-const adderStateService = new AdderStateService({name: "", quantity: null})
+const adderStateService = new AdderStateService({name: "", quantity: ""})
 
 const App: React.SFC<{}> = () => (
     <View style={{height: "100%", width: "100%"}}><Router>
