@@ -12,7 +12,7 @@ export class AdderStateService {
     this.state = initial
   }
 
-  public async get(): Promise<State> {
+  public get(): State {
     return this.state
   }
 

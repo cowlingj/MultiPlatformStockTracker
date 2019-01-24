@@ -1,7 +1,7 @@
 /** @format */
 
 import * as React from "react"
-import { FlatList, ActivityIndicator, View, Text } from "react-native"
+import { FlatList, View, Text } from "react-native"
 import Dispatcher from "./dispatcher"
 import { StockListState, StockListItem as ModelItem } from "./model"
 import StockListItem from "./StockListItem"
@@ -16,7 +16,7 @@ export interface Props {
 
 export default class StockList extends React.Component<
   Props,
-  StockListState | null
+  StockListState
 > {
   constructor(props: Props) {
     super(props)
@@ -27,14 +27,10 @@ export default class StockList extends React.Component<
         setState(map(data))
       },
     })
-    props.dispatcher.init()
+    this.state = props.dispatcher.init()
   }
 
   public render() {
-    if (this.state === null) {
-      return <ActivityIndicator />
-    }
-
     return (
       <FlatList
         ItemSeparatorComponent={() => (

@@ -12,7 +12,7 @@
     "eject": "react-native eject --config \"$(pwd)/build-config/rn-cli.config.js\"",
     "web-debug": "ENV='dev' PLATFORM='web' webpack --config build-config/webpack.web.config.ts --mode development",
     "web": "ENV='dev' PLATFORM='web' webpack --config build-config/webpack.web.config.ts --mode development",
-    "web-dev-server": "ENV=dev PLATFORM=web npm run cmd -- webpack-dev-server --config build-config/webpack.web.config.ts --open",
+    "web-dev-server": "npm run web && ENV=dev PLATFORM=web npm run cmd -- webpack-dev-server --config build-config/webpack.web.config.ts --open",
     "desktop": "ENV='dev' PLATFORM='desktop' webpack --config build-config/webpack.desktop.config.ts --mode development && electron ./dist/bundle.desktop.js",
     "react-native": "ts-node node_modules/react-native/local-cli/cli.js $@",
     "cmd": "node_modules/.bin/$@",

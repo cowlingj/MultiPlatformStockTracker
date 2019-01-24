@@ -95,7 +95,7 @@ export class StockListStateService {
     return this.state
   }
 
-  public async get(): Promise<DataModel> {
+  public get(): DataModel {
     return this.state
   }
 }

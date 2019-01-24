@@ -26,13 +26,8 @@ export default class Dispatcher {
     this.history = history
   }
 
-  public init() {
-    this.adderStateServive
-      .get()
-      .then(data => {
-        this.messenger.notify(data)
-      })
-      .catch()
+  public init(): State {
+    return this.adderStateServive.get()
   }
 
   public addItem(name: string, quantity: string) {

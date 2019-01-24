@@ -1,6 +1,6 @@
 /** @format */
 
-import { View, TextInput, Button, ActivityIndicator } from "react-native"
+import { View, TextInput, Button } from "react-native"
 import Dispatcher from "./dispatcher"
 import React from "react"
 import Subscribable from "../../archetecture/observer/Subscribable"
@@ -25,13 +25,10 @@ export default class extends React.Component<Props, State> {
         setState(m)
       },
     })
-    props.dispatcher.init()
+    this.state = props.dispatcher.init()
   }
 
   public render() {
-    if (!this.state) {
-      return <ActivityIndicator />
-    }
     return (
       <View>
         <TextInput

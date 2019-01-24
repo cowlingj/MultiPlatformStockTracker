@@ -5,6 +5,7 @@ import {
   StockListStateService,
   DataModel,
 } from "../../services/StockListStateService"
+import { StockListState } from "./model";
 
 export default class Dispatcher {
   private stockListStateService: StockListStateService
@@ -47,11 +48,8 @@ export default class Dispatcher {
       .catch()
   }
 
-  public init(): void {
-    this.stockListStateService
-      .get()
-      .then(this.stockListObservable.notify.bind(this.stockListObservable))
-      .catch()
+  public init(): StockListState {
+    return this.stockListStateService.get()
   }
 
   public makeHighlighted(id: number): void {
