@@ -24,7 +24,7 @@
     "lint": "tslint --project './tsconfig.json' --config './.tslint.json' '*.{js,ts,jsx,tsx}' '{src,test,build-config}/**/*.{js,ts,jsx,tsx}'"
   },
   "dependencies": {
-    "electron": "^3.0.5",
+    "electron": "^15.5.5",
     "react": "16.6.0-alpha.8af6728",
     "react-art": "16.6.0-alpha.8af6728",
     "react-dom": "16.6.0-alpha.8af6728",
