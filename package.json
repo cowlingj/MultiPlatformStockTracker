@@ -70,7 +70,7 @@
     "jest": "^23.6.0",
     "jest-canvas-mock": "^1.1.0",
     "jest-spec-reporter": "^1.0.5",
-    "jsdom": "^13.1.0",
+    "jsdom": "^16.5.0",
     "metro-react-native-babel-preset": "0.48.1",
     "prettier": "^1.15.2",
     "react-native-typescript-transformer": "^1.2.10",
